@@ -1,0 +1,179 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "spi_config_conf.c"
+  14              	 .section .text.SPI_CONFIG_0_lInit,"ax",%progbits
+  15              	 .align 1
+  16              	 .global SPI_CONFIG_0_lInit
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	SPI_CONFIG_0_lInit:
+  21 0000 38B5     	 push {r3,r4,r5,lr}
+  22 0002 2E4C     	 ldr r4,.L2
+  23 0004 2E49     	 ldr r1,.L2+4
+  24 0006 201C     	 mov r0,r4
+  25 0008 FFF7FEFF 	 bl XMC_SPI_CH_Init
+  26 000c 626B     	 ldr r2,[r4,#52]
+  27 000e 2D4B     	 ldr r3,.L2+8
+  28 0010 5021     	 mov r1,#80
+  29 0012 1340     	 and r3,r2
+  30 0014 F022     	 mov r2,#240
+  31 0016 1203     	 lsl r2,r2,#12
+  32 0018 1343     	 orr r3,r2
+  33 001a 6363     	 str r3,[r4,#52]
+  34 001c F023     	 mov r3,#240
+  35 001e 626B     	 ldr r2,[r4,#52]
+  36 0020 1B05     	 lsl r3,r3,#20
+  37 0022 1343     	 orr r3,r2
+  38 0024 0122     	 mov r2,#1
+  39 0026 1025     	 mov r5,#16
+  40 0028 6363     	 str r3,[r4,#52]
+  41 002a 636B     	 ldr r3,[r4,#52]
+  42 002c 201C     	 mov r0,r4
+  43 002e 1343     	 orr r3,r2
+  44 0030 6363     	 str r3,[r4,#52]
+  45 0032 E369     	 ldr r3,[r4,#28]
+  46 0034 0632     	 add r2,r2,#6
+  47 0036 8B43     	 bic r3,r1
+  48 0038 2B43     	 orr r3,r5
+  49 003a E361     	 str r3,[r4,#28]
+  50 003c E369     	 ldr r3,[r4,#28]
+  51              	 
+  52 003e 9343     	 bic r3,r2
+  53 0040 E361     	 str r3,[r4,#28]
+  54 0042 A36A     	 ldr r3,[r4,#40]
+  55 0044 8B43     	 bic r3,r1
+  56 0046 2B43     	 orr r3,r5
+  57 0048 A362     	 str r3,[r4,#40]
+  58 004a A36A     	 ldr r3,[r4,#40]
+  59 004c 9343     	 bic r3,r2
+  60 004e A362     	 str r3,[r4,#40]
+  61 0050 E36A     	 ldr r3,[r4,#44]
+  62 0052 8B43     	 bic r3,r1
+  63 0054 2B43     	 orr r3,r5
+  64 0056 E362     	 str r3,[r4,#44]
+  65 0058 E36A     	 ldr r3,[r4,#44]
+  66 005a 9343     	 bic r3,r2
+  67 005c E362     	 str r3,[r4,#44]
+  68 005e 236B     	 ldr r3,[r4,#48]
+  69 0060 8B43     	 bic r3,r1
+  70 0062 2B43     	 orr r3,r5
+  71 0064 2363     	 str r3,[r4,#48]
+  72 0066 236B     	 ldr r3,[r4,#48]
+  73 0068 9343     	 bic r3,r2
+  74 006a 2363     	 str r3,[r4,#48]
+  75 006c E36B     	 ldr r3,[r4,#60]
+  76 006e 0132     	 add r2,r2,#1
+  77 0070 9343     	 bic r3,r2
+  78 0072 E363     	 str r3,[r4,#60]
+  79 0074 6269     	 ldr r2,[r4,#20]
+  80 0076 144B     	 ldr r3,.L2+12
+  81 0078 1340     	 and r3,r2
+  82 007a C022     	 mov r2,#192
+  83 007c 1206     	 lsl r2,r2,#24
+  84 007e 1343     	 orr r3,r2
+  85 0080 6361     	 str r3,[r4,#20]
+  86 0082 FFF7FEFF 	 bl XMC_SPI_CH_DisableSlaveSelect
+  87 0086 0423     	 mov r3,#4
+  88 0088 E26B     	 ldr r2,[r4,#60]
+  89 008a 291C     	 mov r1,r5
+  90 008c 1343     	 orr r3,r2
+  91 008e 0222     	 mov r2,#2
+  92 0090 E363     	 str r3,[r4,#60]
+  93 0092 E36B     	 ldr r3,[r4,#60]
+  94 0094 201C     	 mov r0,r4
+  95 0096 1343     	 orr r3,r2
+  96 0098 E363     	 str r3,[r4,#60]
+  97 009a 6269     	 ldr r2,[r4,#20]
+  98 009c 0B4B     	 ldr r3,.L2+16
+  99 009e 1340     	 and r3,r2
+ 100 00a0 A022     	 mov r2,#160
+ 101 00a2 D200     	 lsl r2,r2,#3
+ 102 00a4 1343     	 orr r3,r2
+ 103 00a6 6361     	 str r3,[r4,#20]
+ 104 00a8 0022     	 mov r2,#0
+ 105 00aa FFF7FEFF 	 bl XMC_USIC_CH_SetInterruptNodePointer
+ 106 00ae 8021     	 mov r1,#128
+ 107 00b0 201C     	 mov r0,r4
+ 108 00b2 4902     	 lsl r1,r1,#9
+ 109 00b4 FFF7FEFF 	 bl XMC_SPI_CH_EnableSlaveSelect
+ 110 00b8 38BD     	 pop {r3,r4,r5,pc}
+ 111              	.L3:
+ 112 00ba C046     	 .align 2
+ 113              	.L2:
+ 114 00bc 00020048 	 .word 1207960064
+ 115 00c0 00000000 	 .word .LANCHOR0
+ 116 00c4 FFFFC0FF 	 .word -4128769
+ 117 00c8 FFFFFF2F 	 .word 805306367
+ 118 00cc FF80FFFF 	 .word -32513
+ 120              	 .global SPI_CONFIG_0
+ 121              	 .global SPI_CONFIG_0_config
+ 122              	 .global SPI_CONFIG_0_channel_config
+ 123              	 .global SPI_CONFIG_0_slave_select_list
+ 124              	 .section .data.SPI_CONFIG_0_channel_config,"aw",%progbits
+ 125              	 .align 2
+ 126              	 .set .LANCHOR0,.+0
+ 129              	SPI_CONFIG_0_channel_config:
+ 130 0000 400D0300 	 .word 200000
+ 131 0004 00       	 .byte 0
+ 132 0005 04       	 .byte 4
+ 133 0006 0000     	 .short 0
+ 134              	 .section .data.SPI_CONFIG_0,"aw",%progbits
+ 135              	 .align 2
+ 138              	SPI_CONFIG_0:
+ 139 0000 00020048 	 .word 1207960064
+ 140 0004 00000000 	 .word SPI_CONFIG_0_config
+ 141              	 .section .rodata.SPI_CONFIG_0_slave_select_list,"a",%progbits
+ 142              	 .align 2
+ 145              	SPI_CONFIG_0_slave_select_list:
+ 146 0000 00000100 	 .word 65536
+ 147 0004 00000100 	 .word 65536
+ 148 0008 00000000 	 .word 0
+ 149 000c 00000000 	 .word 0
+ 150 0010 00000000 	 .word 0
+ 151 0014 00000000 	 .word 0
+ 152 0018 00000000 	 .word 0
+ 153 001c 00000000 	 .word 0
+ 154              	 .section .rodata.SPI_CONFIG_0_config,"a",%progbits
+ 155              	 .align 2
+ 158              	SPI_CONFIG_0_config:
+ 159 0000 00000000 	 .word SPI_CONFIG_0_channel_config
+ 160 0004 00000000 	 .word SPI_CONFIG_0_lInit
+ 161 0008 04       	 .byte 4
+ 162 0009 00       	 .byte 0
+ 163 000a 00       	 .byte 0
+ 164 000b 00       	 .space 1
+ 165 000c 00000000 	 .word SPI_CONFIG_0_slave_select_list
+ 166 0010 00       	 .byte 0
+ 167 0011 00       	 .byte 0
+ 168 0012 02       	 .byte 2
+ 169 0013 00       	 .space 1
+ 170              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 spi_config_conf.c
+    {standard input}:15     .text.SPI_CONFIG_0_lInit:00000000 $t
+    {standard input}:20     .text.SPI_CONFIG_0_lInit:00000000 SPI_CONFIG_0_lInit
+    {standard input}:114    .text.SPI_CONFIG_0_lInit:000000bc $d
+    {standard input}:138    .data.SPI_CONFIG_0:00000000 SPI_CONFIG_0
+    {standard input}:158    .rodata.SPI_CONFIG_0_config:00000000 SPI_CONFIG_0_config
+    {standard input}:129    .data.SPI_CONFIG_0_channel_config:00000000 SPI_CONFIG_0_channel_config
+    {standard input}:145    .rodata.SPI_CONFIG_0_slave_select_list:00000000 SPI_CONFIG_0_slave_select_list
+    {standard input}:125    .data.SPI_CONFIG_0_channel_config:00000000 $d
+    {standard input}:135    .data.SPI_CONFIG_0:00000000 $d
+    {standard input}:142    .rodata.SPI_CONFIG_0_slave_select_list:00000000 $d
+    {standard input}:155    .rodata.SPI_CONFIG_0_config:00000000 $d
+
+UNDEFINED SYMBOLS
+XMC_SPI_CH_Init
+XMC_SPI_CH_DisableSlaveSelect
+XMC_USIC_CH_SetInterruptNodePointer
+XMC_SPI_CH_EnableSlaveSelect

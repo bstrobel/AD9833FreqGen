@@ -1,0 +1,9 @@
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\bin\Release\AD9833Control1.exe.config
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\bin\Release\AD9833Control1.exe
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\bin\Release\AD9833Control1.pdb
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\obj\Release\AD9833Control1.MainWindowForm.resources
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\obj\Release\AD9833Control1.Properties.Resources.resources
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\obj\Release\AD9833Control1.csproj.GenerateResource.Cache
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\obj\Release\AD9833Control1.exe
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\obj\Release\AD9833Control1.pdb
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\obj\Release\AD9833Control1.csprojResolveAssemblyReference.cache

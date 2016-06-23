@@ -1,0 +1,2 @@
+C:\Users\Bernd\Documents\AD9833DDS\AD9833Control\AD9833Control1\AD9833Control1\bin\Debug\AD9833Control.exe.config
+C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\AD9833Control\AD9833Control\bin\Debug\AD9833Control.exe.config

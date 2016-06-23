@@ -1,0 +1,101 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "MCP41010.c"
+  14              	 .section .text.MCP41010_StartSPI,"ax",%progbits
+  15              	 .align 1
+  16              	 .global MCP41010_StartSPI
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	MCP41010_StartSPI:
+  21 0000 10B5     	 push {r4,lr}
+  22 0002 0B4C     	 ldr r4,.L4
+  23 0004 2068     	 ldr r0,[r4]
+  24 0006 FFF7FEFF 	 bl XMC_SPI_CH_DisableSlaveSelect
+  25 000a 8021     	 mov r1,#128
+  26 000c 2068     	 ldr r0,[r4]
+  27 000e 8902     	 lsl r1,r1,#10
+  28 0010 FFF7FEFF 	 bl XMC_SPI_CH_EnableSlaveSelect
+  29 0014 074B     	 ldr r3,.L4+4
+  30 0016 8022     	 mov r2,#128
+  31 0018 187B     	 ldrb r0,[r3,#12]
+  32 001a 1968     	 ldr r1,[r3]
+  33 001c 0123     	 mov r3,#1
+  34 001e 5202     	 lsl r2,r2,#9
+  35 0020 8240     	 lsl r2,r2,r0
+  36 0022 8340     	 lsl r3,r3,r0
+  37 0024 4A60     	 str r2,[r1,#4]
+  38              	.L2:
+  39 0026 4A6A     	 ldr r2,[r1,#36]
+  40 0028 1A42     	 tst r2,r3
+  41 002a FCD1     	 bne .L2
+  42              	 
+  43 002c 10BD     	 pop {r4,pc}
+  44              	.L5:
+  45 002e C046     	 .align 2
+  46              	.L4:
+  47 0030 00000000 	 .word SPI_CONFIG_0
+  48 0034 00000000 	 .word DIGITAL_IO_SSL2
+  50              	 .section .text.MCP41010_set,"ax",%progbits
+  51              	 .align 1
+  52              	 .global MCP41010_set
+  53              	 .code 16
+  54              	 .thumb_func
+  56              	MCP41010_set:
+  57 0000 38B5     	 push {r3,r4,r5,lr}
+  58 0002 8024     	 mov r4,#128
+  59 0004 8821     	 mov r1,#136
+  60 0006 031C     	 mov r3,r0
+  61 0008 0A4D     	 ldr r5,.L9
+  62 000a 6401     	 lsl r4,r4,#5
+  63 000c 2868     	 ldr r0,[r5]
+  64 000e 4901     	 lsl r1,r1,#5
+  65 0010 C26C     	 ldr r2,[r0,#76]
+  66 0012 1943     	 orr r1,r3
+  67 0014 2243     	 orr r2,r4
+  68 0016 C264     	 str r2,[r0,#76]
+  69 0018 0022     	 mov r2,#0
+  70 001a FFF7FEFF 	 bl XMC_SPI_CH_Transmit
+  71 001e 2A68     	 ldr r2,[r5]
+  72              	.L7:
+  73 0020 936C     	 ldr r3,[r2,#72]
+  74 0022 2342     	 tst r3,r4
+  75 0024 FCD0     	 beq .L7
+  76 0026 044B     	 ldr r3,.L9+4
+  77              	 
+  78 0028 1A68     	 ldr r2,[r3]
+  79 002a 197B     	 ldrb r1,[r3,#12]
+  80 002c 0123     	 mov r3,#1
+  81 002e 8B40     	 lsl r3,r3,r1
+  82 0030 5360     	 str r3,[r2,#4]
+  83 0032 38BD     	 pop {r3,r4,r5,pc}
+  84              	.L10:
+  85              	 .align 2
+  86              	.L9:
+  87 0034 00000000 	 .word SPI_CONFIG_0
+  88 0038 00000000 	 .word DIGITAL_IO_SSL2
+  90              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 MCP41010.c
+    {standard input}:15     .text.MCP41010_StartSPI:00000000 $t
+    {standard input}:20     .text.MCP41010_StartSPI:00000000 MCP41010_StartSPI
+    {standard input}:47     .text.MCP41010_StartSPI:00000030 $d
+    {standard input}:51     .text.MCP41010_set:00000000 $t
+    {standard input}:56     .text.MCP41010_set:00000000 MCP41010_set
+    {standard input}:87     .text.MCP41010_set:00000034 $d
+
+UNDEFINED SYMBOLS
+XMC_SPI_CH_DisableSlaveSelect
+XMC_SPI_CH_EnableSlaveSelect
+SPI_CONFIG_0
+DIGITAL_IO_SSL2
+XMC_SPI_CH_Transmit

@@ -1,0 +1,96 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "digital_io_conf.c"
+  14              	 .global DIGITAL_IO_LED2
+  15              	 .global DIGITAL_IO_LED1
+  16              	 .global DIGITAL_IO_SSL2
+  17              	 .global DIGITAL_IO_SSL1
+  18              	 .global DIGITAL_IO_SCLK
+  19              	 .global DIGITAL_IO_MOSI
+  20              	 .section .rodata.DIGITAL_IO_MOSI,"a",%progbits
+  21              	 .align 2
+  24              	DIGITAL_IO_MOSI:
+  25 0000 00000440 	 .word 1074003968
+  26 0004 B8       	 .byte -72
+  27 0005 000000   	 .space 3
+  28 0008 00000100 	 .word 65536
+  29 000c 07       	 .byte 7
+  30 000d 00       	 .byte 0
+  31 000e 0000     	 .space 2
+  32              	 .section .rodata.DIGITAL_IO_SCLK,"a",%progbits
+  33              	 .align 2
+  36              	DIGITAL_IO_SCLK:
+  37 0000 00000440 	 .word 1074003968
+  38 0004 B8       	 .byte -72
+  39 0005 000000   	 .space 3
+  40 0008 00000100 	 .word 65536
+  41 000c 08       	 .byte 8
+  42 000d 00       	 .byte 0
+  43 000e 0000     	 .space 2
+  44              	 .section .rodata.DIGITAL_IO_SSL1,"a",%progbits
+  45              	 .align 2
+  48              	DIGITAL_IO_SSL1:
+  49 0000 00000440 	 .word 1074003968
+  50 0004 B8       	 .byte -72
+  51 0005 000000   	 .space 3
+  52 0008 00000100 	 .word 65536
+  53 000c 09       	 .byte 9
+  54 000d 00       	 .byte 0
+  55 000e 0000     	 .space 2
+  56              	 .section .rodata.DIGITAL_IO_SSL2,"a",%progbits
+  57              	 .align 2
+  60              	DIGITAL_IO_SSL2:
+  61 0000 00000440 	 .word 1074003968
+  62 0004 80       	 .byte -128
+  63 0005 000000   	 .space 3
+  64 0008 00000100 	 .word 65536
+  65 000c 06       	 .byte 6
+  66 000d 00       	 .byte 0
+  67 000e 0000     	 .space 2
+  68              	 .section .rodata.DIGITAL_IO_LED1,"a",%progbits
+  69              	 .align 2
+  72              	DIGITAL_IO_LED1:
+  73 0000 00010440 	 .word 1074004224
+  74 0004 80       	 .byte -128
+  75 0005 000000   	 .space 3
+  76 0008 00000100 	 .word 65536
+  77 000c 00       	 .byte 0
+  78 000d 00       	 .byte 0
+  79 000e 0000     	 .space 2
+  80              	 .section .rodata.DIGITAL_IO_LED2,"a",%progbits
+  81              	 .align 2
+  84              	DIGITAL_IO_LED2:
+  85 0000 00010440 	 .word 1074004224
+  86 0004 80       	 .byte -128
+  87 0005 000000   	 .space 3
+  88 0008 00000100 	 .word 65536
+  89 000c 01       	 .byte 1
+  90 000d 00       	 .byte 0
+  91 000e 0000     	 .space 2
+  92              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 digital_io_conf.c
+    {standard input}:84     .rodata.DIGITAL_IO_LED2:00000000 DIGITAL_IO_LED2
+    {standard input}:72     .rodata.DIGITAL_IO_LED1:00000000 DIGITAL_IO_LED1
+    {standard input}:60     .rodata.DIGITAL_IO_SSL2:00000000 DIGITAL_IO_SSL2
+    {standard input}:48     .rodata.DIGITAL_IO_SSL1:00000000 DIGITAL_IO_SSL1
+    {standard input}:36     .rodata.DIGITAL_IO_SCLK:00000000 DIGITAL_IO_SCLK
+    {standard input}:24     .rodata.DIGITAL_IO_MOSI:00000000 DIGITAL_IO_MOSI
+    {standard input}:21     .rodata.DIGITAL_IO_MOSI:00000000 $d
+    {standard input}:33     .rodata.DIGITAL_IO_SCLK:00000000 $d
+    {standard input}:45     .rodata.DIGITAL_IO_SSL1:00000000 $d
+    {standard input}:57     .rodata.DIGITAL_IO_SSL2:00000000 $d
+    {standard input}:69     .rodata.DIGITAL_IO_LED1:00000000 $d
+    {standard input}:81     .rodata.DIGITAL_IO_LED2:00000000 $d
+
+NO UNDEFINED SYMBOLS

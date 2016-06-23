@@ -1,0 +1,239 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "AD9833.c"
+  14              	 .section .text.AD9833_WaitEndSPI,"ax",%progbits
+  15              	 .align 1
+  16              	 .code 16
+  17              	 .thumb_func
+  19              	AD9833_WaitEndSPI:
+  20 0000 024B     	 ldr r3,.L5
+  21 0002 1A68     	 ldr r2,[r3]
+  22              	.L2:
+  23 0004 936C     	 ldr r3,[r2,#72]
+  24 0006 DB04     	 lsl r3,r3,#19
+  25 0008 FCD5     	 bpl .L2
+  26              	 
+  27 000a 7047     	 bx lr
+  28              	.L6:
+  29              	 .align 2
+  30              	.L5:
+  31 000c 00000000 	 .word SPI_CONFIG_0
+  33              	 .section .text.AD9833_StartSPI,"ax",%progbits
+  34              	 .align 1
+  35              	 .global AD9833_StartSPI
+  36              	 .code 16
+  37              	 .thumb_func
+  39              	AD9833_StartSPI:
+  40 0000 10B5     	 push {r4,lr}
+  41 0002 054C     	 ldr r4,.L8
+  42              	 
+  43 0004 2068     	 ldr r0,[r4]
+  44 0006 FFF7FEFF 	 bl XMC_SPI_CH_DisableSlaveSelect
+  45 000a 8021     	 mov r1,#128
+  46 000c 2068     	 ldr r0,[r4]
+  47 000e 4902     	 lsl r1,r1,#9
+  48 0010 FFF7FEFF 	 bl XMC_SPI_CH_EnableSlaveSelect
+  49 0014 10BD     	 pop {r4,pc}
+  50              	.L9:
+  51 0016 C046     	 .align 2
+  52              	.L8:
+  53 0018 00000000 	 .word SPI_CONFIG_0
+  55              	 .section .text.AD9833_Reset,"ax",%progbits
+  56              	 .align 1
+  57              	 .global AD9833_Reset
+  58              	 .code 16
+  59              	 .thumb_func
+  61              	AD9833_Reset:
+  62 0000 8022     	 mov r2,#128
+  63 0002 8421     	 mov r1,#132
+  64 0004 08B5     	 push {r3,lr}
+  65 0006 054B     	 ldr r3,.L11
+  66 0008 5201     	 lsl r2,r2,#5
+  67 000a 1868     	 ldr r0,[r3]
+  68 000c 8901     	 lsl r1,r1,#6
+  69 000e C36C     	 ldr r3,[r0,#76]
+  70              	 
+  71 0010 1343     	 orr r3,r2
+  72 0012 C364     	 str r3,[r0,#76]
+  73 0014 0022     	 mov r2,#0
+  74 0016 FFF7FEFF 	 bl XMC_SPI_CH_Transmit
+  75 001a 08BD     	 pop {r3,pc}
+  76              	.L12:
+  77              	 .align 2
+  78              	.L11:
+  79 001c 00000000 	 .word SPI_CONFIG_0
+  81              	 .global __aeabi_uldivmod
+  82              	 .section .text.AD9833_SetFreq,"ax",%progbits
+  83              	 .align 1
+  84              	 .global AD9833_SetFreq
+  85              	 .code 16
+  86              	 .thumb_func
+  88              	AD9833_SetFreq:
+  89 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+  90 0002 8025     	 mov r5,#128
+  91 0004 0028     	 cmp r0,#0
+  92 0006 01D0     	 beq .L15
+  93 0008 2D02     	 lsl r5,r5,#8
+  94 000a 00E0     	 b .L14
+  95              	.L15:
+  96 000c ED01     	 lsl r5,r5,#7
+  97              	.L14:
+  98 000e 0B09     	 lsr r3,r1,#4
+  99 0010 0807     	 lsl r0,r1,#28
+ 100 0012 114A     	 ldr r2,.L16
+ 101 0014 191C     	 mov r1,r3
+ 102 0016 0023     	 mov r3,#0
+ 103 0018 FFF7FEFF 	 bl __aeabi_uldivmod
+ 104 001c 8026     	 mov r6,#128
+ 105 001e 011C     	 mov r1,r0
+ 106 0020 0E4F     	 ldr r7,.L16+4
+ 107 0022 840B     	 lsr r4,r0,#14
+ 108 0024 3868     	 ldr r0,[r7]
+ 109 0026 7601     	 lsl r6,r6,#5
+ 110 0028 C36C     	 ldr r3,[r0,#76]
+ 111 002a 8904     	 lsl r1,r1,#18
+ 112 002c 3343     	 orr r3,r6
+ 113 002e 890C     	 lsr r1,r1,#18
+ 114 0030 2943     	 orr r1,r5
+ 115 0032 C364     	 str r3,[r0,#76]
+ 116 0034 0022     	 mov r2,#0
+ 117 0036 FFF7FEFF 	 bl XMC_SPI_CH_Transmit
+ 118 003a FFF7FEFF 	 bl AD9833_WaitEndSPI
+ 119 003e 3868     	 ldr r0,[r7]
+ 120 0040 A4B2     	 uxth r4,r4
+ 121 0042 C36C     	 ldr r3,[r0,#76]
+ 122 0044 2C43     	 orr r4,r5
+ 123 0046 1E43     	 orr r6,r3
+ 124 0048 C664     	 str r6,[r0,#76]
+ 125 004a 211C     	 mov r1,r4
+ 126 004c 0022     	 mov r2,#0
+ 127 004e FFF7FEFF 	 bl XMC_SPI_CH_Transmit
+ 128              	 
+ 129 0052 FFF7FEFF 	 bl AD9833_WaitEndSPI
+ 130 0056 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 131              	.L17:
+ 132              	 .align 2
+ 133              	.L16:
+ 134 0058 40787D01 	 .word 25000000
+ 135 005c 00000000 	 .word SPI_CONFIG_0
+ 137              	 .section .text.AD9833_SetPhase,"ax",%progbits
+ 138              	 .align 1
+ 139              	 .global AD9833_SetPhase
+ 140              	 .code 16
+ 141              	 .thumb_func
+ 143              	AD9833_SetPhase:
+ 144 0000 08B5     	 push {r3,lr}
+ 145 0002 0B23     	 mov r3,#11
+ 146 0004 8022     	 mov r2,#128
+ 147 0006 5943     	 mul r1,r3
+ 148 0008 074B     	 ldr r3,.L19
+ 149 000a 5201     	 lsl r2,r2,#5
+ 150 000c 1868     	 ldr r0,[r3]
+ 151              	 
+ 152 000e C36C     	 ldr r3,[r0,#76]
+ 153 0010 1343     	 orr r3,r2
+ 154 0012 C364     	 str r3,[r0,#76]
+ 155 0014 054B     	 ldr r3,.L19+4
+ 156 0016 0022     	 mov r2,#0
+ 157 0018 1943     	 orr r1,r3
+ 158 001a 89B2     	 uxth r1,r1
+ 159 001c FFF7FEFF 	 bl XMC_SPI_CH_Transmit
+ 160 0020 FFF7FEFF 	 bl AD9833_WaitEndSPI
+ 161 0024 08BD     	 pop {r3,pc}
+ 162              	.L20:
+ 163 0026 C046     	 .align 2
+ 164              	.L19:
+ 165 0028 00000000 	 .word SPI_CONFIG_0
+ 166 002c 00C0FFFF 	 .word -16384
+ 168              	 .section .text.AD9833_SelFreqPhase,"ax",%progbits
+ 169              	 .align 1
+ 170              	 .global AD9833_SelFreqPhase
+ 171              	 .code 16
+ 172              	 .thumb_func
+ 174              	AD9833_SelFreqPhase:
+ 175 0000 08B5     	 push {r3,lr}
+ 176 0002 A023     	 mov r3,#160
+ 177 0004 0128     	 cmp r0,#1
+ 178 0006 00D0     	 beq .L32
+ 179 0008 8023     	 mov r3,#128
+ 180              	.L32:
+ 181 000a 9B01     	 lsl r3,r3,#6
+ 182 000c 0029     	 cmp r1,#0
+ 183 000e 05D0     	 beq .L25
+ 184 0010 0129     	 cmp r1,#1
+ 185 0012 05D1     	 bne .L24
+ 186 0014 8021     	 mov r1,#128
+ 187 0016 C900     	 lsl r1,r1,#3
+ 188 0018 0B43     	 orr r3,r1
+ 189 001a 01E0     	 b .L24
+ 190              	.L25:
+ 191 001c 0B49     	 ldr r1,.L34
+ 192 001e 0B40     	 and r3,r1
+ 193              	.L24:
+ 194 0020 012A     	 cmp r2,#1
+ 195 0022 03D0     	 beq .L28
+ 196 0024 022A     	 cmp r2,#2
+ 197 0026 03D1     	 bne .L27
+ 198 0028 2822     	 mov r2,#40
+ 199 002a 00E0     	 b .L33
+ 200              	.L28:
+ 201 002c 0222     	 mov r2,#2
+ 202              	.L33:
+ 203 002e 1343     	 orr r3,r2
+ 204              	.L27:
+ 205 0030 8021     	 mov r1,#128
+ 206 0032 074A     	 ldr r2,.L34+4
+ 207 0034 4901     	 lsl r1,r1,#5
+ 208 0036 1068     	 ldr r0,[r2]
+ 209              	 
+ 210 0038 C26C     	 ldr r2,[r0,#76]
+ 211 003a 0A43     	 orr r2,r1
+ 212 003c C264     	 str r2,[r0,#76]
+ 213 003e 191C     	 mov r1,r3
+ 214 0040 0022     	 mov r2,#0
+ 215 0042 FFF7FEFF 	 bl XMC_SPI_CH_Transmit
+ 216 0046 FFF7FEFF 	 bl AD9833_WaitEndSPI
+ 217 004a 08BD     	 pop {r3,pc}
+ 218              	.L35:
+ 219              	 .align 2
+ 220              	.L34:
+ 221 004c FFFBFFFF 	 .word -1025
+ 222 0050 00000000 	 .word SPI_CONFIG_0
+ 224              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 AD9833.c
+    {standard input}:15     .text.AD9833_WaitEndSPI:00000000 $t
+    {standard input}:19     .text.AD9833_WaitEndSPI:00000000 AD9833_WaitEndSPI
+    {standard input}:31     .text.AD9833_WaitEndSPI:0000000c $d
+    {standard input}:34     .text.AD9833_StartSPI:00000000 $t
+    {standard input}:39     .text.AD9833_StartSPI:00000000 AD9833_StartSPI
+    {standard input}:53     .text.AD9833_StartSPI:00000018 $d
+    {standard input}:56     .text.AD9833_Reset:00000000 $t
+    {standard input}:61     .text.AD9833_Reset:00000000 AD9833_Reset
+    {standard input}:79     .text.AD9833_Reset:0000001c $d
+    {standard input}:83     .text.AD9833_SetFreq:00000000 $t
+    {standard input}:88     .text.AD9833_SetFreq:00000000 AD9833_SetFreq
+    {standard input}:134    .text.AD9833_SetFreq:00000058 $d
+    {standard input}:138    .text.AD9833_SetPhase:00000000 $t
+    {standard input}:143    .text.AD9833_SetPhase:00000000 AD9833_SetPhase
+    {standard input}:165    .text.AD9833_SetPhase:00000028 $d
+    {standard input}:169    .text.AD9833_SelFreqPhase:00000000 $t
+    {standard input}:174    .text.AD9833_SelFreqPhase:00000000 AD9833_SelFreqPhase
+    {standard input}:221    .text.AD9833_SelFreqPhase:0000004c $d
+
+UNDEFINED SYMBOLS
+SPI_CONFIG_0
+XMC_SPI_CH_DisableSlaveSelect
+XMC_SPI_CH_EnableSlaveSelect
+XMC_SPI_CH_Transmit
+__aeabi_uldivmod

@@ -1,0 +1,174 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "uart_conf.c"
+  14              	 .section .text.UART_0_init,"ax",%progbits
+  15              	 .align 1
+  16              	 .global UART_0_init
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	UART_0_init:
+  21 0000 38B5     	 push {r3,r4,r5,lr}
+  22 0002 9024     	 mov r4,#144
+  23 0004 1A4D     	 ldr r5,.L2
+  24 0006 E405     	 lsl r4,r4,#23
+  25 0008 281C     	 mov r0,r5
+  26 000a 1A4A     	 ldr r2,.L2+4
+  27 000c 0221     	 mov r1,#2
+  28 000e FFF7FEFF 	 bl XMC_GPIO_Init
+  29 0012 201C     	 mov r0,r4
+  30 0014 1849     	 ldr r1,.L2+8
+  31 0016 FFF7FEFF 	 bl XMC_UART_CH_Init
+  32 001a 0722     	 mov r2,#7
+  33 001c 0621     	 mov r1,#6
+  34 001e E369     	 ldr r3,[r4,#28]
+  35 0020 201C     	 mov r0,r4
+  36 0022 9343     	 bic r3,r2
+  37 0024 0B43     	 orr r3,r1
+  38 0026 E361     	 str r3,[r4,#28]
+  39 0028 A36A     	 ldr r3,[r4,#40]
+  40 002a 0A31     	 add r1,r1,#10
+  41 002c 9343     	 bic r3,r2
+  42 002e A362     	 str r3,[r4,#40]
+  43 0030 236B     	 ldr r3,[r4,#48]
+  44              	 
+  45 0032 9343     	 bic r3,r2
+  46 0034 2363     	 str r3,[r4,#48]
+  47 0036 033A     	 sub r2,r2,#3
+  48 0038 0123     	 mov r3,#1
+  49 003a FFF7FEFF 	 bl XMC_USIC_CH_TXFIFO_Configure
+  50 003e 201C     	 mov r0,r4
+  51 0040 0021     	 mov r1,#0
+  52 0042 0422     	 mov r2,#4
+  53 0044 0F23     	 mov r3,#15
+  54 0046 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_Configure
+  55 004a 0F22     	 mov r2,#15
+  56 004c 236C     	 ldr r3,[r4,#64]
+  57 004e 281C     	 mov r0,r5
+  58 0050 9343     	 bic r3,r2
+  59 0052 0D3A     	 sub r2,r2,#13
+  60 0054 1343     	 orr r3,r2
+  61 0056 2364     	 str r3,[r4,#64]
+  62 0058 0121     	 mov r1,#1
+  63 005a 084A     	 ldr r2,.L2+12
+  64 005c FFF7FEFF 	 bl XMC_GPIO_Init
+  65 0060 201C     	 mov r0,r4
+  66 0062 1021     	 mov r1,#16
+  67 0064 0022     	 mov r2,#0
+  68 0066 FFF7FEFF 	 bl XMC_USIC_CH_SetInterruptNodePointer
+  69 006a 0020     	 mov r0,#0
+  70 006c 38BD     	 pop {r3,r4,r5,pc}
+  71              	.L3:
+  72 006e C046     	 .align 2
+  73              	.L2:
+  74 0070 00020440 	 .word 1074004480
+  75 0074 00000000 	 .word .LANCHOR0
+  76 0078 00000000 	 .word .LANCHOR1
+  77 007c 00000000 	 .word .LANCHOR2
+  79              	 .global UART_0_rx_pin_config
+  80              	 .global UART_0
+  81              	 .global UART_0_runtime
+  82              	 .global UART_0_config
+  83              	 .global UART_0_tx_pin
+  84              	 .global UART_0_tx_pin_config
+  85              	 .global UART_0_channel_config
+  86              	 .section .data.UART_0,"aw",%progbits
+  87              	 .align 2
+  90              	UART_0:
+  91 0000 00000048 	 .word 1207959552
+  92 0004 00000000 	 .word UART_0_config
+  93 0008 00000000 	 .word UART_0_runtime
+  94              	 .section .rodata.UART_0_config,"a",%progbits
+  95              	 .align 2
+  98              	UART_0_config:
+  99 0000 00000000 	 .word UART_0_channel_config
+ 100 0004 00000000 	 .word UART_0_init
+ 101 0008 00000000 	 .word 0
+ 102 000c 00000000 	 .word 0
+ 103 0010 00000000 	 .word 0
+ 104 0014 00000000 	 .word 0
+ 105 0018 00000000 	 .word 0
+ 106 001c 00000000 	 .word UART_0_tx_pin
+ 107 0020 00       	 .byte 0
+ 108 0021 02       	 .byte 2
+ 109 0022 02       	 .byte 2
+ 110 0023 04       	 .byte 4
+ 111 0024 04       	 .byte 4
+ 112 0025 000000   	 .space 3
+ 113              	 .section .rodata.UART_0_rx_pin_config,"a",%progbits
+ 114              	 .align 2
+ 115              	 .set .LANCHOR0,.+0
+ 118              	UART_0_rx_pin_config:
+ 119 0000 00       	 .byte 0
+ 120 0001 00       	 .byte 0
+ 121 0002 0000     	 .space 2
+ 122 0004 01000000 	 .word 1
+ 123              	 .section .bss.UART_0_runtime,"aw",%nobits
+ 124              	 .align 2
+ 127              	UART_0_runtime:
+ 128 0000 00000000 	 .space 28
+ 128      00000000 
+ 128      00000000 
+ 128      00000000 
+ 128      00000000 
+ 129              	 .section .rodata.UART_0_tx_pin,"a",%progbits
+ 130              	 .align 2
+ 133              	UART_0_tx_pin:
+ 134 0000 00020440 	 .word 1074004480
+ 135 0004 01       	 .byte 1
+ 136 0005 000000   	 .space 3
+ 137 0008 00000000 	 .word UART_0_tx_pin_config
+ 138              	 .section .rodata.UART_0_tx_pin_config,"a",%progbits
+ 139              	 .align 2
+ 140              	 .set .LANCHOR2,.+0
+ 143              	UART_0_tx_pin_config:
+ 144 0000 B0       	 .byte -80
+ 145 0001 000000   	 .space 3
+ 146 0004 01000000 	 .word 1
+ 147              	 .section .rodata.UART_0_channel_config,"a",%progbits
+ 148              	 .align 2
+ 149              	 .set .LANCHOR1,.+0
+ 152              	UART_0_channel_config:
+ 153 0000 00C20100 	 .word 115200
+ 154 0004 08       	 .byte 8
+ 155 0005 08       	 .byte 8
+ 156 0006 01       	 .byte 1
+ 157 0007 10       	 .byte 16
+ 158 0008 0000     	 .short 0
+ 159 000a 0000     	 .space 2
+ 160              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart_conf.c
+    {standard input}:15     .text.UART_0_init:00000000 $t
+    {standard input}:20     .text.UART_0_init:00000000 UART_0_init
+    {standard input}:74     .text.UART_0_init:00000070 $d
+    {standard input}:118    .rodata.UART_0_rx_pin_config:00000000 UART_0_rx_pin_config
+    {standard input}:90     .data.UART_0:00000000 UART_0
+    {standard input}:127    .bss.UART_0_runtime:00000000 UART_0_runtime
+    {standard input}:98     .rodata.UART_0_config:00000000 UART_0_config
+    {standard input}:133    .rodata.UART_0_tx_pin:00000000 UART_0_tx_pin
+    {standard input}:143    .rodata.UART_0_tx_pin_config:00000000 UART_0_tx_pin_config
+    {standard input}:152    .rodata.UART_0_channel_config:00000000 UART_0_channel_config
+    {standard input}:87     .data.UART_0:00000000 $d
+    {standard input}:95     .rodata.UART_0_config:00000000 $d
+    {standard input}:114    .rodata.UART_0_rx_pin_config:00000000 $d
+    {standard input}:124    .bss.UART_0_runtime:00000000 $d
+    {standard input}:130    .rodata.UART_0_tx_pin:00000000 $d
+    {standard input}:139    .rodata.UART_0_tx_pin_config:00000000 $d
+    {standard input}:148    .rodata.UART_0_channel_config:00000000 $d
+
+UNDEFINED SYMBOLS
+XMC_GPIO_Init
+XMC_UART_CH_Init
+XMC_USIC_CH_TXFIFO_Configure
+XMC_USIC_CH_RXFIFO_Configure
+XMC_USIC_CH_SetInterruptNodePointer
