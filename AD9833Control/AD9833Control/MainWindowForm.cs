@@ -34,6 +34,8 @@ namespace AD9833Control
             interactiveControls.Add(tbFreqMHz);
             interactiveControls.Add(tbOutVoltage);
             interactiveControls.Add(tbFreqAdjust);
+            interactiveControls.Add(btn1Vpp);
+            interactiveControls.Add(btnFreqAdjustReset);
             interactiveControls.Add(rbWfSine);
             interactiveControls.Add(rbWfSquare);
             interactiveControls.Add(rbWfTriangular);

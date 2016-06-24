@@ -105,6 +105,11 @@ namespace AD9833Control
                 _serialPortStatus = SerialPortStatus.Closed;
                 OnSerialPortStatusChanged(ex);
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                _serialPortStatus = SerialPortStatus.Closed;
+                OnSerialPortStatusChanged(ex);
+            }
         }
 
         private void sendToXMC2GO()
