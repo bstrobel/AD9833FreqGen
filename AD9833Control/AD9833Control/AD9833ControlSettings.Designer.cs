@@ -50,9 +50,9 @@ namespace AD9833Control {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public long LastFreq {
+        public int LastFreq {
             get {
-                return ((long)(this["LastFreq"]));
+                return ((int)(this["LastFreq"]));
             }
             set {
                 this["LastFreq"] = value;
@@ -80,6 +80,18 @@ namespace AD9833Control {
             }
             set {
                 this["LastOutVoltage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastAdjustFreq {
+            get {
+                return ((int)(this["LastAdjustFreq"]));
+            }
+            set {
+                this["LastAdjustFreq"] = value;
             }
         }
     }

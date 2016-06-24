@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AD9833Control1" GeneratedClassName="AD9833ControlSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AD9833Control" GeneratedClassName="AD9833ControlSettings">
   <Profiles />
   <Settings>
     <Setting Name="COMPort" Type="System.String" Scope="User">
@@ -8,7 +8,7 @@
     <Setting Name="BaudRate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">115200</Value>
     </Setting>
-    <Setting Name="LastFreq" Type="System.Int64" Scope="User">
+    <Setting Name="LastFreq" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="LastWaveForm" Type="System.Int32" Scope="User">
@@ -16,6 +16,9 @@
     </Setting>
     <Setting Name="LastOutVoltage" Type="System.Int16" Scope="User">
       <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="LastAdjustFreq" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

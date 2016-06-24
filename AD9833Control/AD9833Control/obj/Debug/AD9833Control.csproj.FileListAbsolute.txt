@@ -7,3 +7,4 @@ C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\AD9833Control\AD9833Control\obj
 C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\AD9833Control\AD9833Control\obj\Debug\AD9833Control.csproj.GenerateResource.Cache
 C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\AD9833Control\AD9833Control\obj\Debug\AD9833Control.exe
 C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\AD9833Control\AD9833Control\obj\Debug\AD9833Control.pdb
+C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\AD9833Control\AD9833Control\obj\Debug\AD9833Control.csprojResolveAssemblyReference.cache

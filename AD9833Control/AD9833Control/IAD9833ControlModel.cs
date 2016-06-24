@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AD9833Control
 {
+
     public enum WaveFormsEnum
     {
         Sine,

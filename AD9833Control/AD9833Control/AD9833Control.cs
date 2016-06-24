@@ -10,6 +10,8 @@ namespace AD9833Control
 {
     public class AD9833Control : IAD9833ControlModel
     {
+        public const long MAX_FREQ = 12500000;
+        public const short MAX_VOLTAGE = 255;
         private long _frequency = 0;
         private WaveFormsEnum _waveForm = WaveFormsEnum.Sine;
         private short _outVoltage = 100;
@@ -23,7 +25,10 @@ namespace AD9833Control
 
             set
             {
-                _frequency = value;
+                if (value <= MAX_FREQ)
+                    _frequency = value;
+                else
+                    _frequency = MAX_FREQ;
                 sendToXMC2GO();
             }
         }
@@ -51,7 +56,10 @@ namespace AD9833Control
 
             set
             {
-                _outVoltage = value;
+                if (value <= MAX_VOLTAGE)
+                    _outVoltage = value;
+                else
+                    _outVoltage = MAX_VOLTAGE;
                 sendToXMC2GO();
             }
         }
