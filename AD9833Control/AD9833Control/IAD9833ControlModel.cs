@@ -33,6 +33,7 @@ namespace AD9833Control
 
     public interface IAD9833ControlModel
     {
+        bool Enabled { get; set; }
         long Frequency { get; set; }
         WaveFormsEnum WaveForm { get; set; }
         short OutVoltage { get; set; }

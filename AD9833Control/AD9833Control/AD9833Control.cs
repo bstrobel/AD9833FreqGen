@@ -10,12 +10,28 @@ namespace AD9833Control
 {
     public class AD9833Control : IAD9833ControlModel
     {
+        private bool _enabled = false;
         public const long MAX_FREQ = 12500000;
         public const short MAX_VOLTAGE = 255;
         private long _frequency = 0;
         private WaveFormsEnum _waveForm = WaveFormsEnum.Sine;
         private short _outVoltage = 100;
         private SerialPortStatus _serialPortStatus = SerialPortStatus.Closed;
+
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled;
+            }
+
+            set
+            {
+                _enabled = value;
+                sendToXMC2GO();
+            }
+        }
+
         public long Frequency
         {
             get
@@ -114,6 +130,14 @@ namespace AD9833Control
 
         private void sendToXMC2GO()
         {
+            if (!_enabled)
+            {
+                if (!serialPort.IsOpen)
+                    openSerialPort();
+                if (_serialPortStatus == SerialPortStatus.Open)
+                    serialPort.Write("r\r\n");
+                return;
+            }
             if (Frequency > 0)
             {
                 String sWaveForm;

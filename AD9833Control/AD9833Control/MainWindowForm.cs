@@ -18,6 +18,7 @@ namespace AD9833Control
         private Color displayTextColor = SystemColors.Info;
         private Color displayTextWarnColor = Color.Orange;
         private IAD9833ControlModel ctrl;
+        private bool outputEnabled = false;
         private AD9833ControlSettings settings = new AD9833ControlSettings();
         private List<Control> interactiveControls = new List<Control>();
         public MainWindowForm(AD9833Control ctrl)
@@ -221,6 +222,7 @@ namespace AD9833Control
             }
             lblActFreq.Text = String.Format("{0:N0} Hz", (long)actFreq);
             ctrl.Frequency = (long)actFreq;
+            ctrl.Enabled = outputEnabled;
         }
 
         private void btn1Vpp_Clicked(object sender, EventArgs e)
@@ -238,6 +240,23 @@ namespace AD9833Control
         private void btnFreqAdjustRest_Clicked(object sender, EventArgs e)
         {
             tbFreqAdjust.Value = 0;
+            adjustFreq();
+        }
+
+        private void OutputEnable_Clicked(object sender, EventArgs e)
+        {
+            if (sender.Equals(btnEnableOutput))
+            {
+                outputEnabled = true;
+                btnEnableOutput.Enabled = false;
+                btnDisableOutput.Enabled = true;
+            }
+            else if (sender.Equals(btnDisableOutput))
+            {
+                outputEnabled = false;
+                btnEnableOutput.Enabled = true;
+                btnDisableOutput.Enabled = false;
+            }
             adjustFreq();
         }
     }
