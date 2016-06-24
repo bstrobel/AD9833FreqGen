@@ -34,6 +34,8 @@
             this.tblLayPnlOutVoltage = new System.Windows.Forms.TableLayoutPanel();
             this.tbOutVoltage = new System.Windows.Forms.TrackBar();
             this.lblOutVoltage = new System.Windows.Forms.Label();
+            this.lblUeff = new System.Windows.Forms.Label();
+            this.btn1Vpp = new System.Windows.Forms.Button();
             this.gbFreqSetting = new System.Windows.Forms.GroupBox();
             this.tblLayPnlFrequencySliders = new System.Windows.Forms.TableLayoutPanel();
             this.tbFreqHz1 = new System.Windows.Forms.TrackBar();
@@ -61,6 +63,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusSerialPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerSerialConnect = new System.Windows.Forms.Timer(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.progBarOutVoltage = new AD9833ControlCustomForms.VerticalProgressBar();
             this.gbMainFreqSetting.SuspendLayout();
             this.gbOutVoltage.SuspendLayout();
             this.tblLayPnlOutVoltage.SuspendLayout();
@@ -77,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbFreqMHz)).BeginInit();
             this.gbWaveForm.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbMainFreqSetting
@@ -88,7 +93,7 @@
             this.gbMainFreqSetting.Controls.Add(this.gbWaveForm);
             this.gbMainFreqSetting.Location = new System.Drawing.Point(12, 12);
             this.gbMainFreqSetting.Name = "gbMainFreqSetting";
-            this.gbMainFreqSetting.Size = new System.Drawing.Size(944, 439);
+            this.gbMainFreqSetting.Size = new System.Drawing.Size(969, 439);
             this.gbMainFreqSetting.TabIndex = 0;
             this.gbMainFreqSetting.TabStop = false;
             this.gbMainFreqSetting.Text = "Main Frequency";
@@ -102,36 +107,44 @@
             this.gbOutVoltage.Controls.Add(this.tblLayPnlOutVoltage);
             this.gbOutVoltage.Location = new System.Drawing.Point(6, 19);
             this.gbOutVoltage.Name = "gbOutVoltage";
-            this.gbOutVoltage.Size = new System.Drawing.Size(324, 179);
+            this.gbOutVoltage.Size = new System.Drawing.Size(349, 179);
             this.gbOutVoltage.TabIndex = 12;
             this.gbOutVoltage.TabStop = false;
-            this.gbOutVoltage.Text = "% Output Voltage";
+            this.gbOutVoltage.Text = "Output Voltage";
             // 
             // tblLayPnlOutVoltage
             // 
             this.tblLayPnlOutVoltage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tblLayPnlOutVoltage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tblLayPnlOutVoltage.ColumnCount = 1;
-            this.tblLayPnlOutVoltage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 311F));
-            this.tblLayPnlOutVoltage.Controls.Add(this.tbOutVoltage, 0, 1);
+            this.tblLayPnlOutVoltage.ColumnCount = 3;
+            this.tblLayPnlOutVoltage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblLayPnlOutVoltage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblLayPnlOutVoltage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblLayPnlOutVoltage.Controls.Add(this.tbOutVoltage, 0, 2);
             this.tblLayPnlOutVoltage.Controls.Add(this.lblOutVoltage, 0, 0);
+            this.tblLayPnlOutVoltage.Controls.Add(this.lblUeff, 0, 1);
+            this.tblLayPnlOutVoltage.Controls.Add(this.btn1Vpp, 1, 1);
+            this.tblLayPnlOutVoltage.Controls.Add(this.progBarOutVoltage, 2, 0);
             this.tblLayPnlOutVoltage.Location = new System.Drawing.Point(7, 19);
             this.tblLayPnlOutVoltage.Name = "tblLayPnlOutVoltage";
-            this.tblLayPnlOutVoltage.RowCount = 2;
-            this.tblLayPnlOutVoltage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tblLayPnlOutVoltage.RowCount = 3;
+            this.tblLayPnlOutVoltage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblLayPnlOutVoltage.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblLayPnlOutVoltage.Size = new System.Drawing.Size(311, 151);
+            this.tblLayPnlOutVoltage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tblLayPnlOutVoltage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblLayPnlOutVoltage.Size = new System.Drawing.Size(336, 151);
             this.tblLayPnlOutVoltage.TabIndex = 0;
             // 
             // tbOutVoltage
             // 
-            this.tbOutVoltage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbOutVoltage.Location = new System.Drawing.Point(3, 103);
+            this.tblLayPnlOutVoltage.SetColumnSpan(this.tbOutVoltage, 3);
+            this.tbOutVoltage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOutVoltage.Location = new System.Drawing.Point(0, 106);
+            this.tbOutVoltage.Margin = new System.Windows.Forms.Padding(0);
             this.tbOutVoltage.Maximum = 255;
             this.tbOutVoltage.Name = "tbOutVoltage";
-            this.tbOutVoltage.Size = new System.Drawing.Size(305, 45);
+            this.tbOutVoltage.Size = new System.Drawing.Size(336, 45);
             this.tbOutVoltage.TabIndex = 14;
             this.tbOutVoltage.TickFrequency = 16;
             this.tbOutVoltage.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -139,21 +152,51 @@
             // lblOutVoltage
             // 
             this.lblOutVoltage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tblLayPnlOutVoltage.SetColumnSpan(this.lblOutVoltage, 2);
             this.lblOutVoltage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOutVoltage.Font = new System.Drawing.Font("Consolas", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutVoltage.Font = new System.Drawing.Font("Consolas", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOutVoltage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblOutVoltage.Location = new System.Drawing.Point(3, 0);
+            this.lblOutVoltage.Location = new System.Drawing.Point(0, 0);
+            this.lblOutVoltage.Margin = new System.Windows.Forms.Padding(0);
             this.lblOutVoltage.Name = "lblOutVoltage";
-            this.lblOutVoltage.Size = new System.Drawing.Size(305, 100);
+            this.lblOutVoltage.Size = new System.Drawing.Size(312, 83);
             this.lblOutVoltage.TabIndex = 9;
-            this.lblOutVoltage.Text = "100.0%";
+            this.lblOutVoltage.Text = "Û= 0,00 Vpp";
             this.lblOutVoltage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUeff
+            // 
+            this.lblUeff.AutoSize = true;
+            this.lblUeff.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblUeff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblUeff.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUeff.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblUeff.Location = new System.Drawing.Point(0, 83);
+            this.lblUeff.Margin = new System.Windows.Forms.Padding(0);
+            this.lblUeff.Name = "lblUeff";
+            this.lblUeff.Size = new System.Drawing.Size(156, 23);
+            this.lblUeff.TabIndex = 15;
+            this.lblUeff.Text = "Ueff= 0.00V";
+            this.lblUeff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btn1Vpp
+            // 
+            this.btn1Vpp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn1Vpp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn1Vpp.Location = new System.Drawing.Point(156, 83);
+            this.btn1Vpp.Margin = new System.Windows.Forms.Padding(0);
+            this.btn1Vpp.Name = "btn1Vpp";
+            this.btn1Vpp.Size = new System.Drawing.Size(156, 23);
+            this.btn1Vpp.TabIndex = 16;
+            this.btn1Vpp.Text = "1Vpp";
+            this.btn1Vpp.UseVisualStyleBackColor = true;
+            this.btn1Vpp.Click += new System.EventHandler(this.btn1Vpp_Clicked);
             // 
             // gbFreqSetting
             // 
             this.gbFreqSetting.AutoSize = true;
             this.gbFreqSetting.Controls.Add(this.tblLayPnlFrequencySliders);
-            this.gbFreqSetting.Location = new System.Drawing.Point(336, 19);
+            this.gbFreqSetting.Location = new System.Drawing.Point(361, 19);
             this.gbFreqSetting.Name = "gbFreqSetting";
             this.gbFreqSetting.Size = new System.Drawing.Size(602, 401);
             this.gbFreqSetting.TabIndex = 11;
@@ -310,9 +353,10 @@
             this.tblLayPnlFrequencySliders.SetColumnSpan(this.lblActFreq, 7);
             this.lblActFreq.Font = new System.Drawing.Font("Consolas", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActFreq.ForeColor = System.Drawing.SystemColors.Info;
-            this.lblActFreq.Location = new System.Drawing.Point(3, 0);
+            this.lblActFreq.Location = new System.Drawing.Point(0, 0);
+            this.lblActFreq.Margin = new System.Windows.Forms.Padding(0);
             this.lblActFreq.Name = "lblActFreq";
-            this.lblActFreq.Size = new System.Drawing.Size(580, 100);
+            this.lblActFreq.Size = new System.Drawing.Size(586, 100);
             this.lblActFreq.TabIndex = 2;
             this.lblActFreq.Text = "10,000,000 Hz";
             this.lblActFreq.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -447,9 +491,9 @@
             this.gbWaveForm.Controls.Add(this.rbWfSquare);
             this.gbWaveForm.Controls.Add(this.rbWfTriangular);
             this.gbWaveForm.Controls.Add(this.rbWfSine);
-            this.gbWaveForm.Location = new System.Drawing.Point(6, 216);
+            this.gbWaveForm.Location = new System.Drawing.Point(6, 204);
             this.gbWaveForm.Name = "gbWaveForm";
-            this.gbWaveForm.Size = new System.Drawing.Size(324, 97);
+            this.gbWaveForm.Size = new System.Drawing.Size(349, 97);
             this.gbWaveForm.TabIndex = 0;
             this.gbWaveForm.TabStop = false;
             this.gbWaveForm.Text = "Waveform";
@@ -494,7 +538,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 460);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.ShowItemToolTips = true;
-            this.statusStrip1.Size = new System.Drawing.Size(965, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(990, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 1;
             // 
@@ -510,13 +554,30 @@
             this.timerSerialConnect.Enabled = true;
             this.timerSerialConnect.Interval = 3000;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // progBarOutVoltage
+            // 
+            this.progBarOutVoltage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progBarOutVoltage.Location = new System.Drawing.Point(312, 0);
+            this.progBarOutVoltage.Margin = new System.Windows.Forms.Padding(0);
+            this.progBarOutVoltage.MarqueeAnimationSpeed = 0;
+            this.progBarOutVoltage.Maximum = 255;
+            this.progBarOutVoltage.Name = "progBarOutVoltage";
+            this.tblLayPnlOutVoltage.SetRowSpan(this.progBarOutVoltage, 2);
+            this.progBarOutVoltage.Size = new System.Drawing.Size(24, 106);
+            this.progBarOutVoltage.TabIndex = 17;
+            this.progBarOutVoltage.Value = 50;
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(965, 482);
+            this.ClientSize = new System.Drawing.Size(990, 482);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gbMainFreqSetting);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -545,6 +606,7 @@
             this.gbWaveForm.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,6 +645,10 @@
         private System.Windows.Forms.TrackBar tbFreqkHz1;
         private System.Windows.Forms.TrackBar tbFreqkHz10;
         private System.Windows.Forms.TrackBar tbFreqkHz100;
+        private System.Windows.Forms.Label lblUeff;
+        private System.Windows.Forms.Button btn1Vpp;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private AD9833ControlCustomForms.VerticalProgressBar progBarOutVoltage;
     }
 }
 

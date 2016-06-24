@@ -12,6 +12,8 @@ namespace AD9833Control
 {
     public partial class MainWindowForm : Form
     {
+        private const short UPP_1V_VALUE = 144;
+        private const short UPP_MAX_VALUE = 218;
         private Color displayTextColor = SystemColors.Info;
         private Color displayTextWarnColor = Color.Orange;
         private IAD9833ControlModel ctrl;
@@ -51,7 +53,8 @@ namespace AD9833Control
             {
                 rb.CheckedChanged += waveFormRb_CheckedChanged;
             }
-            adjustOutVoltage(settings.LastOutVoltage);
+            tbOutVoltage.Value = settings.LastOutVoltage;
+            adjustOutVoltage();
             adjustFreq(settings.LastFreq, 0);
             WaveFormsEnum wf = (WaveFormsEnum)settings.LastWaveForm;
             switch(wf)
@@ -122,26 +125,36 @@ namespace AD9833Control
                 wf = WaveFormsEnum.Square;
             ctrl.WaveForm = wf;
             settings.LastWaveForm = (int)wf;
+            adjustOutVoltage();
         }
 
         private void voltageSliderMoved(object sender, EventArgs e)
         {
-            TrackBar sb = (TrackBar)sender;
-            short val = (short)(sb.Value);
-            adjustOutVoltage(val);
+            progBarOutVoltage.Value = tbOutVoltage.Value;
+            adjustOutVoltage();
         }
 
-        private void adjustOutVoltage(short outVoltage)
+        private void adjustOutVoltage()
         {
-            settings.LastOutVoltage = outVoltage;
-            double dispVal = outVoltage * 100d / 255d;
-            lblOutVoltage.Text = String.Format("{0:N1}%", dispVal);
-            if (outVoltage > 218)
+            short val = (short)tbOutVoltage.Value;
+            settings.LastOutVoltage = val;
+            double dispVal = (double)val / (double)UPP_1V_VALUE;
+            // https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx#FFormatString
+            lblOutVoltage.Text = String.Format("Û= {0:F2} Vpp", dispVal);
+            double dispValEff = 0;
+            if (rbWfSine.Checked)
+                dispValEff = dispVal / Math.Sqrt(2);
+            else if (rbWfTriangular.Checked)
+                dispValEff = dispVal / Math.Sqrt(3);
+            else
+                dispValEff = dispVal;
+            lblUeff.Text = String.Format("Ueff= {0:F2} V", dispValEff);
+            if (val > 218)
                 lblOutVoltage.ForeColor = displayTextWarnColor;
             else
                 lblOutVoltage.ForeColor = displayTextColor;
-            tbOutVoltage.Value = outVoltage;
-            ctrl.OutVoltage = outVoltage;
+            tbOutVoltage.Value = val;
+            ctrl.OutVoltage = val;
         }
 
         private void freqSliderMoved(object sender, EventArgs e)
@@ -178,6 +191,12 @@ namespace AD9833Control
             lblFreqSbHz10.Text = String.Format("{0:N0}0 Hz", (val / 10) % 10);
             tbFreqHz1.Value = val % 10;
             lblFreqSbHz1.Text = String.Format("{0:N0} Hz", val % 10);
+        }
+
+        private void btn1Vpp_Clicked(object sender, EventArgs e)
+        {
+            tbOutVoltage.Value = UPP_1V_VALUE;
+            adjustOutVoltage();
         }
     }
 }
