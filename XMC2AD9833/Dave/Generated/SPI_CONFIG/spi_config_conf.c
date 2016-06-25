@@ -88,7 +88,7 @@ const XMC_SPI_CH_SLAVE_SELECT_t SPI_CONFIG_0_slave_select_list[8] =
 /* USIC channel configuration for SPI */
 XMC_SPI_CH_CONFIG_t SPI_CONFIG_0_channel_config =
 {
-  .baudrate = 200000U,
+  .baudrate = 2000000U,
   .bus_mode = XMC_SPI_CH_BUS_MODE_MASTER,
   .selo_inversion = XMC_SPI_CH_SLAVE_SEL_INV_TO_MSLS, 
   .parity_mode = XMC_USIC_CH_PARITY_MODE_NONE
