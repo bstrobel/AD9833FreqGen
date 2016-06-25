@@ -658,3 +658,243 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY com.ifx.dave.LibraryManager 4 0 2016-06-24 17:41:15.926
 !MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/Contributed/v4.1//daveSite.xml
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-24 17:58:43.903
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-24 17:58:43.971
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2016-06-24 17:58:44.062
+!MESSAGE Time Taken By Serialization  : 88 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY SOLVER 1 0 2016-06-24 17:58:44.211
+!MESSAGE Solver exited (0)
+
+!ENTRY SOLVER 1 0 2016-06-24 17:58:44.472
+!MESSAGE USER_ACTION : Solver Status: DISCONNECTED
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-24 17:58:44.476
+!MESSAGE ****************Cleaning project data:XMC2AD9833*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-24 17:58:44.597
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 526 msec 
+!SESSION 2016-06-25 11:39:54.452 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_DE
+Framework arguments:  -showlocation
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -showlocation
+
+!ENTRY org.eclipse.ui 2 0 2016-06-25 11:39:56.852
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-06-25 11:39:56.852
+!MESSAGE Cannot bind to an undefined command: plug-in='org.eclipse.xtext.ui', id='org.eclipse.xtext.ui.editor.outline.QuickOutline'
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-06-25 11:40:02.299
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Bernd'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:05.089
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 9 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:05.363
+!MESSAGE USER_ACTION : Active project:XMC2AD9833
+
+!ENTRY COMMON 1 0 2016-06-25 11:40:06.450
+!MESSAGE Time Taken By De-Serialization  : 554 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:40:06.466
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:06.616
+!MESSAGE USER_ACTION : Time taken for initializing Application Model is: 1254 msec 
+
+!ENTRY APPSTORE 1 0 2016-06-25 11:40:06.981
+!MESSAGE USER_ACTION : Time taken for initializing data from AppStore is: 362 msec 
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.243
+!MESSAGE USER_ACTION : Library store ECO file :C:\Users\Bernd\Infineon\D_LibraryStore_4.1\resources\XMC1.1.00.Q024.ALL\device\xmc1100\0\MANIFEST\solver_data\xmc4500_solver.eco
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.269
+!MESSAGE USER_ACTION : Copied ECO file to temp location :C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\Dave4WS\.metadata\.plugins\solver_data\XMC1.1.00.Q024.ALL\xmc4500_solver.eco
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.526
+!MESSAGE USER_ACTION : Default solver exe path is: C:\Programs\Dave4\eclipse\Solver\lib\i386_nt\eclipse.exe
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.534
+!MESSAGE USER_ACTION : Default solver exe path is: C:\Programs\Dave4\eclipse\Solver\lib\i386_nt\eclipse.exe
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.538
+!MESSAGE USER_ACTION : GlobalSize= 750MB; LocalSize: 128MB
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.541
+!MESSAGE USER_ACTION : Creating OutOfProcessEclipse instance...
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:07.703
+!MESSAGE USER_ACTION : Solver Status: CONNECTED
+
+!ENTRY SOLVER 1 0 2016-06-25 11:40:08.649
+!MESSAGE USER_ACTION : Loaded ECO file :C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\Dave4WS\.metadata\.plugins\solver_data\XMC1.1.00.Q024.ALL\xmc4500_solver.eco
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:08.694
+!MESSAGE USER_ACTION : Time taken by SolverManager is: 1709 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:08.713
+!MESSAGE USER_ACTION : Time taken for updating AddAppDialog is: 5 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:08.717
+!MESSAGE USER_ACTION : Time taken for updating views is: 1 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:09.806
+!MESSAGE USER_ACTION : Time taken for rendering views is: 1083 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:40:10.165
+!MESSAGE Only One DAVE Application is running 
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2016-06-25 11:40:10.239
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/Examples/XMC_IFX/v4.1//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2016-06-25 11:40:16.627
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/XMC_IFX/v4.1//daveSite.xml
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 11:40:19.970
+!MESSAGE USER_ACTION : Time taken for opening editor is: 470 msec 
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2016-06-25 11:40:30.077
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/Contributed/v4.1//daveSite.xml
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 11:46:41.620
+!MESSAGE USER_ACTION : Setting value = "Interrupt" of "gcombo_receive_mode" in APP: UART/4.1.6/0
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:46:41.673
+!MESSAGE USER_ACTION : CASE-1 PR->PR
+ CPU_CTRL_XMC1 [4.0.2] lStoreAppVersion: 4.0.6:l
+
+!ENTRY SOLVER 1 0 2016-06-25 11:46:41.753
+!MESSAGE USER_ACTION : Creating an APP: CPU_CTRL_XMC1 [4.0.6]
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 11:46:41.922
+!MESSAGE USER_ACTION : Created APP: CPU_CTRL_XMC1 [4.0.6]-->http://resources/4.0.6/app/CPU_CTRL_XMC1/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:42.300
+!MESSAGE Time taken for processing complete solver result is: 41 msec 
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:42.305
+!MESSAGE *****Serialization is called after successful solver action*****
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:42.313
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:42.423
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2016-06-25 11:46:42.495
+!MESSAGE Time Taken By Serialization  : 69 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:42.500
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:42.544
+!MESSAGE Time taken for serialization in msec: 239
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 11:46:42.585
+!MESSAGE USER_ACTION : Time taken for refreshing UART/4.1.6/0 editor is : 9
+
+!ENTRY SOLVER 1 0 2016-06-25 11:46:42.588
+!MESSAGE Time Taken By Solver for UI Action: 394 ms
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 11:46:56.058
+!MESSAGE USER_ACTION : Setting value = "true" of "gcheck_rx_callback" in APP: UART/4.1.6/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:56.066
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:56.069
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:56.098
+!MESSAGE Time taken for serialization in msec: 29
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:46:56.102
+!MESSAGE *****************************
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 11:47:52.650
+!MESSAGE USER_ACTION : Setting value = "ISR_UART_0_Receive" of "gstring_rx_callback" in APP: UART/4.1.6/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:47:52.655
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:47:52.658
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:47:52.682
+!MESSAGE Time taken for serialization in msec: 23
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 11:47:52.686
+!MESSAGE *****************************
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 12:04:15.876
+!MESSAGE USER_ACTION : Time taken for opening editor is: 93 msec 
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 12:07:11.471
+!MESSAGE USER_ACTION : Time taken for opening editor is: 190 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 12:38:51.471
+!MESSAGE USER_ACTION : App Getting Added: WATCHDOG [4.0.14]
+
+!ENTRY SOLVER 1 0 2016-06-25 12:38:51.492
+!MESSAGE USER_ACTION : Creating an APP: WATCHDOG [4.0.14]
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 12:38:51.626
+!MESSAGE USER_ACTION : CASE-1 PR->PR
+ CLOCK_XMC1 [4.0.2] lStoreAppVersion: 4.0.14:p
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 12:38:51.729
+!MESSAGE USER_ACTION : Created APP: WATCHDOG [4.0.14]-->http://resources/4.0.14/app/WATCHDOG/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 12:38:51.843
+!MESSAGE Time taken for processing complete solver result is: 35 msec 
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 12:38:51.846
+!MESSAGE *****Serialization is called after successful solver action*****
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 12:38:51.849
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 12:38:51.934
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2016-06-25 12:38:51.996
+!MESSAGE Time Taken By Serialization  : 59 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 12:38:52.007
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 12:38:52.046
+!MESSAGE Time taken for serialization in msec: 200
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 12:38:52.071
+!MESSAGE USER_ACTION : Time taken for refreshing UART/4.1.6/0 editor is : 4
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 12:38:56.036
+!MESSAGE USER_ACTION : Time taken for opening editor is: 171 msec 
+
+!ENTRY CODEGEN 1 0 2016-06-25 12:39:26.975
+!MESSAGE Code generation started...
+
+!ENTRY CODEGEN 1 0 2016-06-25 12:39:28.004
+!MESSAGE Code generation completed...
+
+!ENTRY org.eclipse.ui 4 4 2016-06-25 12:51:44.863
+!MESSAGE Conflicting handlers for org.eclipse.debug.ui.commands.DebugLast: {ActionDelegateHandlerProxy(null,org.eclipse.debug.internal.ui.actions.DebugLastAction)} vs {ActionDelegateHandlerProxy(null,com.dave.activeproject.ui.actions.ActiveProjDebugLastAction)}
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag 4 0 2016-06-25 13:34:50.845
+!MESSAGE Debug session 'XMC2AD9833 Debug' already started. Terminate the first one before restarting.
+
+!ENTRY org.eclipse.equinox.security 1 0 2016-06-25 14:13:00.487
+!MESSAGE New keyring password generated. 

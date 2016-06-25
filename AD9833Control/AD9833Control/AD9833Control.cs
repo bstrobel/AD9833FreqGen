@@ -163,7 +163,7 @@ namespace AD9833Control
                 if (!serialPort.IsOpen)
                     openSerialPort();
                 if (_serialPortStatus == SerialPortStatus.Open)
-                    serialPort.Write(sWaveForm + _frequency + ",0," + _outVoltage + "\r\n");
+                    serialPort.Write(sWaveForm + _frequency + "," + _outVoltage + "\r\n");
             }
 
         }
