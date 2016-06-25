@@ -1,4 +1,8 @@
+package Model.APPS.CPU_CTRL_XMC1.v4_0_6.Templates;
 
+import Model.APPS.CPU_CTRL_XMC1.v4_0_6.CPU_CTRL_XMC1
+
+out.print("""
 /**
  * @cond
  ***********************************************************************************************************************
@@ -33,63 +37,36 @@
  * Change History
  * --------------
  *
- * 2014-06-16:
+ * 2015-02-16:
  *     - Initial version<br>
+ *
  * @endcond
  *
  */
-
-#ifndef _DAVE_H_
-#define _DAVE_H_
 
 /***********************************************************************************************************************
  * HEADER FILES
  **********************************************************************************************************************/
 
-/** #include DAVE APP Header files. */
-#include "xmc_common.h"  
-
-#include "CLOCK_XMC1/clock_xmc1.h"
-  
-
-#include "CPU_CTRL_XMC1/cpu_ctrl_xmc1.h"
-  
-
-#include "UART/uart.h"
-  
-
-#include "SPI_CONFIG/spi_config.h"
-  
-
-#include "DIGITAL_IO/digital_io.h"
-  
-
-#include "WATCHDOG/watchdog.h"
-  
-	
+#ifndef CPU_CTRL_XMC1_EXTERN_H
+#define CPU_CTRL_XMC1_EXTERN_H
 
 /**********************************************************************************************************************
- * ENUMS
+ * MACROS
  **********************************************************************************************************************/
-typedef enum DAVE_STATUS
-{
-  DAVE_STATUS_SUCCESS = 0,
-  DAVE_STATUS_FAILURE,
-  DAVE_STATUS_ALREADY_INITIALIZED
-} DAVE_STATUS_t;
 
 /***********************************************************************************************************************
-* API PROTOTYPES
+ * EXTERN DECLARATIONS
 ***********************************************************************************************************************/
-#ifdef __cplusplus
-extern "C" {
-#endif
+""");
 
-DAVE_STATUS_t DAVE_Init(void);
-
-#ifdef __cplusplus
+for (Object obj : appInstancesList ) {
+	String objLabel = obj.getInstanceLabel()
+out.print("""
+extern CPU_CTRL_XMC1_t ${objLabel}; 
+""");
 }
+
+out.print("""
 #endif
-
-#endif  /** ifndef _DAVE_H_ */
-
+""");

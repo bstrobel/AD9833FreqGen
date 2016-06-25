@@ -63,6 +63,13 @@
  ***********************************************************************************************************************/
 
 /*
+ * Function implements the data reception. It is called from the receive interrupt service handler.
+ * Function reads data from the receive block and updates the user's buffer. It is called again when the data is
+ * received again. When receive FIFO is used, the function sets the trigger limit based on the size of data to be
+ * received.
+ */
+extern void UART_lReceiveHandler(const UART_t * const handle);
+/*
  * Function monitors the configured protocol interrupt flags. It is called from the protocol interrupt
  * service handler.
  * Function reads the status of the USIC channel and checks for configured flags in the APP UI.
@@ -107,7 +114,8 @@ const UART_CONFIG_t UART_0_config =
   .channel_config   = &UART_0_channel_config,
 
 
-  .fptr_uart_config = UART_0_init,  
+  .fptr_uart_config = UART_0_init,
+  .rx_cbhandler = ISR_UART_0_Receive,  
   .sync_error_cbhandler = NULL,  
   .rx_noise_error_cbhandler = NULL,  
   .format_error_bit0_cbhandler = NULL,  
@@ -116,7 +124,7 @@ const UART_CONFIG_t UART_0_config =
   .tx_pin_config    = &UART_0_tx_pin,
   .mode             = UART_MODE_FULLDUPLEX,
   .transmit_mode = UART_TRANSFER_MODE_DIRECT,
-  .receive_mode = UART_TRANSFER_MODE_DIRECT,
+  .receive_mode = UART_TRANSFER_MODE_INTERRUPT,
   .tx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
   .rx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
 };
@@ -166,7 +174,7 @@ UART_STATUS_t UART_0_init()
   XMC_USIC_CH_RXFIFO_Configure(XMC_UART0_CH0,
         0U,
         XMC_USIC_CH_FIFO_SIZE_16WORDS,
-        15U);
+        0U);
   /* Start UART */
   XMC_UART_CH_Start(XMC_UART0_CH0);
 
@@ -176,7 +184,21 @@ UART_STATUS_t UART_0_init()
   /*Set service request for UART protocol events*/
   XMC_USIC_CH_SetInterruptNodePointer(XMC_UART0_CH0, XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
      0U);
+  /*Set service request for rx FIFO receive interrupt*/
+  XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH0, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
+       0x1U);
+  XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH0, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_ALTERNATE,
+       0x1U);
+  /*Set priority and enable NVIC node for receive interrupt*/
+  NVIC_SetPriority((IRQn_Type)10, 3U);
+  NVIC_EnableIRQ((IRQn_Type)10);
   return status;
 }
+/*Receive ISR*/
+void UART_0_RX_HANDLER()
+{
+  UART_lReceiveHandler(&UART_0);
+}
+
 /*CODE_BLOCK_END*/
 

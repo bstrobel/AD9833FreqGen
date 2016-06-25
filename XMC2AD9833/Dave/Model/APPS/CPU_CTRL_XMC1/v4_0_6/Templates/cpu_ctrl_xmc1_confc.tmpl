@@ -1,4 +1,8 @@
+package Model.APPS.CPU_CTRL_XMC1.v4_0_6.Templates;
 
+import Model.APPS.CPU_CTRL_XMC1.v4_0_6.CPU_CTRL_XMC1
+
+out.print("""
 /**
  * @cond
  ***********************************************************************************************************************
@@ -33,63 +37,45 @@
  * Change History
  * --------------
  *
- * 2014-06-16:
+ * 2015-02-16:
  *     - Initial version<br>
+ * 2015-08-12:
+ *     - Added SystemCoreSetup API
+ *
  * @endcond
  *
  */
-
-#ifndef _DAVE_H_
-#define _DAVE_H_
-
 /***********************************************************************************************************************
  * HEADER FILES
  **********************************************************************************************************************/
+#include "cpu_ctrl_xmc1.h"
+""");
 
-/** #include DAVE APP Header files. */
-#include "xmc_common.h"  
-
-#include "CLOCK_XMC1/clock_xmc1.h"
-  
-
-#include "CPU_CTRL_XMC1/cpu_ctrl_xmc1.h"
-  
-
-#include "UART/uart.h"
-  
-
-#include "SPI_CONFIG/spi_config.h"
-  
-
-#include "DIGITAL_IO/digital_io.h"
-  
-
-#include "WATCHDOG/watchdog.h"
-  
-	
-
-/**********************************************************************************************************************
- * ENUMS
- **********************************************************************************************************************/
-typedef enum DAVE_STATUS
+for (Object obj : appInstancesList ) 
 {
-  DAVE_STATUS_SUCCESS = 0,
-  DAVE_STATUS_FAILURE,
-  DAVE_STATUS_ALREADY_INITIALIZED
-} DAVE_STATUS_t;
+	String objLabel = obj.getInstanceLabel()
+	
+	obj.hwres_swd0_0.getRegValue("hwsel","hwsel_hw")
+	obj.hwres_swd0_1.getRegValue("hwsel","hwsel_hw")
+	obj.hwres_swd1_0.getRegValue("hwsel","hwsel_hw")
+	obj.hwres_swd1_1.getRegValue("hwsel","hwsel_hw")
+	obj.hwres_spd0.getRegValue("hwsel","hwsel_hw")
+	obj.hwres_spd1.getRegValue("hwsel","hwsel_hw")
+	
+out.print("""
+/**********************************************************************************************************************
+* DATA STRUCTURES
+**********************************************************************************************************************/
+CPU_CTRL_XMC1_t ${objLabel} =
+{
+  .initialized = false
+};
+ 
+void SystemCoreSetup(void)
+{
 
-/***********************************************************************************************************************
-* API PROTOTYPES
-***********************************************************************************************************************/
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-DAVE_STATUS_t DAVE_Init(void);
-
-#ifdef __cplusplus
 }
-#endif
+""");
+}
 
-#endif  /** ifndef _DAVE_H_ */
 

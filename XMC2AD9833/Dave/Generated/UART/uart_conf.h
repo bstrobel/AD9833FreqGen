@@ -61,8 +61,10 @@
 #define UART_PATCH_VERSION (6U)
 
 
+#define UART_0_RX_HANDLER  IRQ_Hdlr_10
 #define UART_TX_DIRECT_USED
-#define UART_RX_DIRECT_USED
+#define UART_RX_INTERRUPT_USED
+#define UART_IRQ_USED
 
 #endif /* End of UART_CONF_H */
 /*CODE_BLOCK_END*/
