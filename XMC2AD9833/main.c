@@ -8,16 +8,32 @@
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "AD9833.h"
 #include "MCP41010.h"
 
+
+#define S ','
+#define T  '\r'
+#define T_NL  '\n'
+#define CMD_RESET  'r'
+#define CMD_WF_SINE  's'
+#define CMD_WF_TRIANGULAR  't'
+#define CMD_WF_SQUARE  'q'
+
 #define BUFF_SIZE 25
-char welcome_str[] = "XMC2GO/AD9833 WaveGen\r\n";
-char err_msg_buff_ovflw[] = "ERROR: Input Buffer Overflow\r\n";
-char separators[] = { ',', ';' };
+#define MAX_NUM_PARAM 3
+char err_msg_buff_ovflw[] = "ERR:Input Buffer Overflow\r\n";
+char err_msg_processing_ovflw[] = "ERR:Processing Overflow\r\n";
+char err_msg_unkown_cmd[] = "ERR:Unknown Command\r\n";
+char separators[] = { S };
 char rec_data[BUFF_SIZE];
 uint8_t rec_data_idx = 0;
 uint8_t inchar = 0;
+char wf = CMD_RESET;
+int freq = 0;
+int output = 0;
+bool newData = false;
 
 /**
 
@@ -31,22 +47,20 @@ uint8_t inchar = 0;
 
 int main(void) {
 
+	memset(rec_data, 0, BUFF_SIZE); // clear receive buffer before anything else
+
 	DAVE_Init(); /* Initialization of DAVE APPs  */
 	XMC_SPI_CH_Start(SPI_CONFIG_0.channel);	// SPI Initialization
 	XMC_SPI_CH_EnableEvent(SPI_CONFIG_0.channel, XMC_SPI_CH_EVENT_TRANSMIT_SHIFT);
 	DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_SSL2); // MCP41010 has a /CS (inverted)
-	DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1);
-	DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED2);
+	DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1); // LED1 off
+	DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED2); // LED2 off
 
 	AD9833_StartSPI();
 	AD9833_Reset();
 
-	// clear the receive buffer
-	memset(rec_data, 0, BUFF_SIZE);
-
 	/* Main loop */
 	while (1U) {
-		//Check if receive FIFO event is generated
 		UART_STATUS_t ustat = UART_Receive(&UART_0, &inchar, 1);
 		switch (ustat)
 		{
@@ -55,79 +69,61 @@ int main(void) {
 		case UART_STATUS_BUSY:
 			// We shouldn't be here. Start the Watchdog and see what happens.
 			WATCHDOG_Start();
+			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
 			continue;
 		case UART_STATUS_SUCCESS:
-			{
-				// In case the watchdog was fired, stop and reset it.
-				WATCHDOG_Stop();
-				WATCHDOG_Service();
-				// Go to sleep until the next interrupt
-				__WFI();
-				// Processing input after interrupt has been serviced
-				if (rec_data_idx > 0 && rec_data[rec_data_idx-1] == '\r') {
-					// We have received a terminated command string, process it!
-					UART_TransmitWord(&UART_0, '\n'); // Newline for the terminal
-					rec_data[rec_data_idx-1] = 0; // terminate the string with a 0x0
-					rec_data_idx = 0;
-					if (rec_data[0] == 0) {
-						continue; // Nothing to do
-					}
-					NVIC_DisableIRQ((IRQn_Type)10);
-					char* ptr = strtok(rec_data, separators);
-					uint8_t idx = 0;
-					char* tk[4];
-					while (idx < 4 && ptr != NULL) {
-						tk[idx++] = ptr;
-						ptr = strtok(NULL, separators);
-					}
+				break;
+		}
+		// Now wait for the interrupt
+		__WFI();
+		// In case the watchdog was fired, stop and reset it.
+		WATCHDOG_Stop();
+		WATCHDOG_Service();
 
-					AD9833_StartSPI();
-					if (idx > 0)
-					{
-						AD9833_SetFreq(0, atoi(tk[1]));
-					}
+		// Processing input after interrupt has been serviced
+		if (newData) {
+			// We have received a terminated command string, process it!
+			UART_TransmitWord(&UART_0, T_NL); // Newline for the terminal
 
-					uint8_t output = 0;
-					if (idx>2)
-					{
-						output = atoi(tk[2]);
-					}
-
-					if (tk[0] != NULL) {
-						switch (tk[0][0]) {
-						case 's':
-							AD9833_SelFreqPhase(0, 0, SINUS);
-							MCP41010_StartSPI();
-							MCP41010_set(output);
-							DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
-							break;
-						case 't':
-							AD9833_SelFreqPhase(0, 0, TRIANGLE);
-							MCP41010_StartSPI();
-							MCP41010_set(output);
-							DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
-							break;
-						case 'q':
-							AD9833_SelFreqPhase(0, 0, SQUARE);
-							MCP41010_StartSPI();
-							MCP41010_set(output);
-							DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
-							break;
-						default:
-						case 'r':
-							AD9833_Reset();
-							MCP41010_StartSPI();
-							MCP41010_set(0);
-							DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1);
-							break;
-						}
-						DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
-					}
-					memset(rec_data, 0, BUFF_SIZE);
-					NVIC_EnableIRQ((IRQn_Type)10);
-				}
+			AD9833_StartSPI();
+			switch (wf) {
+			case CMD_WF_SINE:
+				AD9833_SetFreq(0, freq);
+				AD9833_SelFreqPhase(0, 0, SINUS);
+				MCP41010_StartSPI();
+				MCP41010_set(output);
+				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
+				break;
+			case CMD_WF_TRIANGULAR:
+				AD9833_SetFreq(0, freq);
+				AD9833_SelFreqPhase(0, 0, TRIANGLE);
+				MCP41010_StartSPI();
+				MCP41010_set(output);
+				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
+				break;
+			case CMD_WF_SQUARE:
+				AD9833_SetFreq(0, freq);
+				AD9833_SelFreqPhase(0, 0, SQUARE);
+				MCP41010_StartSPI();
+				MCP41010_set(output);
+				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
+				break;
+			case CMD_RESET:
+				AD9833_Reset();
+				MCP41010_StartSPI();
+				MCP41010_set(0);
+				DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1); //LED1 off
+				break;
+			default:
+				//do nothing
 				break;
 			}
+			DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED2); // LED2 off
+			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
+			char echo_str[BUFF_SIZE];
+			uint len = snprintf(echo_str, BUFF_SIZE, "ACK:%c%c%d%c%d%c%c", wf, S, freq, S, output, T, T_NL);
+			UART_Transmit(&UART_0, (uint8_t*) echo_str, len);
+			newData = false;
 		}
 	}
 }
@@ -145,25 +141,89 @@ void ISR_UART_Receive(void)
 		{
 			rec_data_idx--;
 			rec_data[rec_data_idx] = 0;
-			UART_TransmitWord(&UART_0, 127);
+			UART_TransmitWord(&UART_0, 127); // send backspace char
 		}
 		else
 		{
-			UART_TransmitWord(&UART_0, 7);
+			UART_TransmitWord(&UART_0, 7); // let terminal beep
 		}
 		return;
 	}
 
-	// we ignore this character
-	if (inchar != '\n')
+	// Add the received char to the buffer if it is not T_NL
+	if (inchar != T_NL)	// we ignore this character
 	{
 		rec_data[rec_data_idx] = inchar;
 		rec_data_idx++;
+		// Handle buffer overflow
 		if (rec_data_idx >= BUFF_SIZE) {
+			UART_TransmitWord(&UART_0,T);
+			UART_TransmitWord(&UART_0,T_NL);
 			UART_Transmit(&UART_0, (uint8_t*) err_msg_buff_ovflw,
 					sizeof(err_msg_buff_ovflw) - 1);
+			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
 			rec_data_idx = 0;
+			memset(rec_data, 0, BUFF_SIZE); // clear buffer
+			return;
 		}
 	}
 	UART_TransmitWord(&UART_0, inchar);
+
+	// We have received a termination character and no previous data is waiting
+	// to be processed.
+	if (rec_data_idx > 0 && rec_data[rec_data_idx-1] == T) {
+		if (rec_data_idx == 1) // empty line
+		{
+			UART_TransmitWord(&UART_0,T_NL);
+			rec_data_idx = 0;
+			memset(rec_data, 0, BUFF_SIZE); // clear buffer
+			return;
+		}
+		if (newData) // there is previous data still waiting to be processed!
+		{
+			UART_Transmit(&UART_0, (uint8_t*) err_msg_processing_ovflw,
+					sizeof(err_msg_processing_ovflw) - 1);
+			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
+			rec_data_idx = 0;
+			memset(rec_data, 0, BUFF_SIZE); // clear buffer
+			return;
+		}
+		rec_data[rec_data_idx-1] = 0; // terminate the string with a 0x0 overwriting termination char
+		char* ptr = strtok(rec_data, separators);
+		uint8_t idx = 0;
+		char* tk[MAX_NUM_PARAM];
+		while (idx < MAX_NUM_PARAM && ptr != NULL) {
+			tk[idx++] = ptr;
+			ptr = strtok(NULL, separators);
+		}
+		if (tk[0] != NULL) {
+			wf = tk[0][0];
+			freq = 0;
+			output = 0;
+			switch (wf)
+			{
+			case CMD_WF_SINE:
+			case CMD_WF_TRIANGULAR:
+			case CMD_WF_SQUARE:
+			case CMD_RESET:
+				break;
+			default:
+				// unknown command, so get out of here
+				UART_TransmitWord(&UART_0,T_NL);
+				UART_Transmit(&UART_0, (uint8_t*) err_msg_unkown_cmd,
+						sizeof(err_msg_unkown_cmd) - 1);
+				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
+				rec_data_idx = 0;
+				memset(rec_data, 0, BUFF_SIZE); // clear buffer
+				return;
+			}
+			if (rec_data_idx > 2) //idx is always at least 1 so we can't use it here
+				freq = atoi(tk[1]);
+			if (idx > 1)
+				output = atoi(tk[2]);
+			newData = true;
+		}
+		rec_data_idx = 0;
+		memset(rec_data, 0, BUFF_SIZE); // clear buffer
+	}
 }

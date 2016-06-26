@@ -54,6 +54,7 @@ enum AD9833_OUT_TYPE {
 	SQUARE
 };
 
+
 void AD9833_StartSPI(void);
 void AD9833_Reset(void);
 void AD9833_SetFreq(int which_freq, uint32_t freq_value);
