@@ -1,0 +1,2 @@
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Configured MCLOCK\=32.0MHz, SPI_CLOCK\=2000kHz</message>\r\n<message>Moved UART Receive to ISR</message>\r\n</messages>
+eclipse.preferences.version=1

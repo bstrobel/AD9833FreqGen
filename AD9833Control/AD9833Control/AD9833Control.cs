@@ -11,6 +11,12 @@ namespace AD9833Control
     public class AD9833Control : IAD9833ControlModel
     {
         private bool _enabled = false;
+        private const string S = ",";
+        private const string T = "\r";
+        private const string CMD_RESET = "r";
+        private const string CMD_WF_SINE = "s";
+        private const string CMD_WF_TRIANGULAR = "t";
+        private const string CMD_WF_SQUARE = "q";
         public const long MAX_FREQ = 12500000;
         public const short MAX_VOLTAGE = 255;
         private long _frequency = 0;
@@ -135,35 +141,35 @@ namespace AD9833Control
                 if (!serialPort.IsOpen)
                     openSerialPort();
                 if (_serialPortStatus == SerialPortStatus.Open)
-                    serialPort.Write("r\r\n");
+                    serialPort.Write(CMD_RESET + T);
                 return;
             }
             if (Frequency > 0)
             {
                 String sWaveForm;
-                switch (WaveForm)
+                switch (_waveForm)
                 {
                     default:
                     case WaveFormsEnum.Sine:
                         {
-                            sWaveForm = "s,";
+                            sWaveForm = CMD_WF_SINE;
                             break;
                         }
                     case WaveFormsEnum.Square:
                         {
-                            sWaveForm = "q,";
+                            sWaveForm = CMD_WF_SQUARE;
                             break;
                         }
                     case WaveFormsEnum.Triangular:
                         {
-                            sWaveForm = "t,";
+                            sWaveForm = CMD_WF_TRIANGULAR;
                             break;
                         }
                 }
                 if (!serialPort.IsOpen)
                     openSerialPort();
                 if (_serialPortStatus == SerialPortStatus.Open)
-                    serialPort.Write(sWaveForm + _frequency + "," + _outVoltage + "\r\n");
+                    serialPort.Write(sWaveForm + S + _frequency + S + _outVoltage + T);
             }
 
         }

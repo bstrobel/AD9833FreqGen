@@ -115,7 +115,7 @@ const UART_CONFIG_t UART_0_config =
 
 
   .fptr_uart_config = UART_0_init,
-  .rx_cbhandler = ISR_UART_0_Receive,  
+  .rx_cbhandler = ISR_UART_Receive,  
   .sync_error_cbhandler = NULL,  
   .rx_noise_error_cbhandler = NULL,  
   .format_error_bit0_cbhandler = NULL,  

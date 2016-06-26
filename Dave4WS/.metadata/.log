@@ -898,3 +898,541 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.equinox.security 1 0 2016-06-25 14:13:00.487
 !MESSAGE New keyring password generated. 
+
+!ENTRY DAVE CE 4 0 2016-06-25 14:16:34.398
+!MESSAGE 
+
+***START of Exception Info***
+null
+com.ifx.davex.ui.editor.ms.DaveCEControlsUpdater.updateUiControlAttributes(DaveCEControlsUpdater.java:427)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.processGMessage(DaveCEEditor.java:981)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.processWidgetNode(DaveCEEditor.java:1337)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.reDraw(DaveCEEditor.java:1177)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.repopulateXWTComposite(DaveCEEditor.java:485)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.populateXwtComposite(DaveCEEditor.java:514)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.createPartControl(DaveCEEditor.java:317)
+org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.createPartControl(CompatibilityPart.java:141)
+org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor.createPartControl(CompatibilityEditor.java:99)
+org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:327)
+sun.reflect.GeneratedMethodAccessor88.invoke(Unknown Source)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:55)
+org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:888)
+org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:869)
+org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:120)
+org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:337)
+org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:258)
+org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:162)
+org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:104)
+org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:73)
+org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:55)
+org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.createWidget(ContributedPartRenderer.java:127)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:983)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:662)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:766)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:737)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:731)
+org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:715)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl$1.handleEvent(PartServiceImpl.java:95)
+org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:40)
+org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:187)
+org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:156)
+org.eclipse.swt.widgets.Display.syncExec(Display.java:4734)
+org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:218)
+org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:36)
+org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:81)
+org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:59)
+org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElement(ElementContainerImpl.java:171)
+org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.showElementInWindow(ModelServiceImpl.java:488)
+org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.bringToTop(ModelServiceImpl.java:454)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl.delegateBringToTop(PartServiceImpl.java:705)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl.bringToTop(PartServiceImpl.java:392)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl.showPart(PartServiceImpl.java:1145)
+org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:3210)
+org.eclipse.ui.internal.WorkbenchPage.access$23(WorkbenchPage.java:3125)
+org.eclipse.ui.internal.WorkbenchPage$9.run(WorkbenchPage.java:3107)
+org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3102)
+org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3066)
+org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3047)
+com.ifx.davex.ce.core.generic.GenericUtils.openInEditor(GenericUtils.java:467)
+com.ifx.davex.ce.ui.views.AppDependencyTreeView.openUiEditor(AppDependencyTreeView.java:659)
+com.ifx.davex.ce.ui.views.AppDependencyTreeView.access$5(AppDependencyTreeView.java:644)
+com.ifx.davex.ce.ui.views.AppDependencyTreeView$6.doubleClick(AppDependencyTreeView.java:293)
+org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:831)
+org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:50)
+org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:178)
+org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:828)
+org.eclipse.jface.viewers.AbstractTreeViewer.handleDoubleSelect(AbstractTreeViewer.java:1472)
+org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1237)
+org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:252)
+org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:249)
+org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:311)
+org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4172)
+org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3761)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+***END of Exception Info***
+
+
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 14:16:34.462
+!MESSAGE USER_ACTION : Time taken for opening editor is: 1303 msec 
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 14:17:08.715
+!MESSAGE USER_ACTION : Setting value = "32.0" of "gfloat_mclkdesfrq" in APP: CLOCK_XMC1/4.0.14/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:17:08.788
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:17:08.801
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:17:08.833
+!MESSAGE Time taken for serialization in msec: 32
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:17:08.837
+!MESSAGE *****************************
+
+!ENTRY CODEGEN 1 0 2016-06-25 14:17:25.199
+!MESSAGE Code generation started...
+
+!ENTRY CODEGEN 1 0 2016-06-25 14:17:25.810
+!MESSAGE Code generation completed...
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 14:17:28.559
+!MESSAGE USER_ACTION : Time taken for opening editor is: 265 msec 
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 14:17:40.518
+!MESSAGE USER_ACTION : Time taken for opening editor is: 330 msec 
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 14:18:20.660
+!MESSAGE USER_ACTION : Setting value = "2000.0" of "gfloat_desired_baud_rate" in APP: SPI_CONFIG/4.0.8/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:18:20.669
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:18:20.672
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:18:20.711
+!MESSAGE Time taken for serialization in msec: 39
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:18:20.729
+!MESSAGE *****************************
+
+!ENTRY CODEGEN 1 0 2016-06-25 14:18:20.889
+!MESSAGE Code generation started...
+
+!ENTRY CODEGEN 1 0 2016-06-25 14:18:21.352
+!MESSAGE Code generation completed...
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 14:37:16.971
+!MESSAGE USER_ACTION : Time taken for opening editor is: 113 msec 
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 14:37:40.404
+!MESSAGE USER_ACTION : Setting value = "5000.0" of "gfloat_desired_upper_bound" in APP: WATCHDOG/4.0.14/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:37:40.440
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:37:40.447
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:37:40.480
+!MESSAGE Time taken for serialization in msec: 33
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 14:37:40.484
+!MESSAGE *****************************
+
+!ENTRY CODEGEN 1 0 2016-06-25 15:00:37.672
+!MESSAGE Code generation started...
+
+!ENTRY CODEGEN 1 0 2016-06-25 15:00:38.217
+!MESSAGE Code generation completed...
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 15:11:42.776
+!MESSAGE USER_ACTION : Time taken for opening editor is: 62 msec 
+
+!ENTRY DAVE CE 4 0 2016-06-25 15:11:56.030
+!MESSAGE 
+
+***START of Exception Info***
+null
+com.ifx.davex.ui.editor.ms.DaveCEControlsUpdater.updateUiControlAttributes(DaveCEControlsUpdater.java:427)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.processGMessage(DaveCEEditor.java:981)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.processWidgetNode(DaveCEEditor.java:1337)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.reDraw(DaveCEEditor.java:1177)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.repopulateXWTComposite(DaveCEEditor.java:485)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.populateXwtComposite(DaveCEEditor.java:514)
+com.ifx.davex.ui.editor.ms.DaveCEEditor.createPartControl(DaveCEEditor.java:317)
+org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.createPartControl(CompatibilityPart.java:141)
+org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor.createPartControl(CompatibilityEditor.java:99)
+org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:327)
+sun.reflect.GeneratedMethodAccessor88.invoke(Unknown Source)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:55)
+org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:888)
+org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:869)
+org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:120)
+org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:337)
+org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:258)
+org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:162)
+org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:104)
+org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:73)
+org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:55)
+org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.createWidget(ContributedPartRenderer.java:127)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:983)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:662)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:766)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:737)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:731)
+org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:715)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl$1.handleEvent(PartServiceImpl.java:95)
+org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:40)
+org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:187)
+org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:156)
+org.eclipse.swt.widgets.Display.syncExec(Display.java:4734)
+org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:218)
+org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:36)
+org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:81)
+org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:59)
+org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElement(ElementContainerImpl.java:171)
+org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.showElementInWindow(ModelServiceImpl.java:488)
+org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.bringToTop(ModelServiceImpl.java:454)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl.delegateBringToTop(PartServiceImpl.java:705)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl.bringToTop(PartServiceImpl.java:392)
+org.eclipse.e4.ui.internal.workbench.PartServiceImpl.showPart(PartServiceImpl.java:1145)
+org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:3210)
+org.eclipse.ui.internal.WorkbenchPage.access$23(WorkbenchPage.java:3125)
+org.eclipse.ui.internal.WorkbenchPage$9.run(WorkbenchPage.java:3107)
+org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3102)
+org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3066)
+org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3047)
+com.ifx.davex.ce.core.generic.GenericUtils.openInEditor(GenericUtils.java:467)
+com.ifx.davex.ce.ui.views.AppDependencyTreeView.openUiEditor(AppDependencyTreeView.java:659)
+com.ifx.davex.ce.ui.views.AppDependencyTreeView.access$5(AppDependencyTreeView.java:644)
+com.ifx.davex.ce.ui.views.AppDependencyTreeView$6.doubleClick(AppDependencyTreeView.java:293)
+org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:831)
+org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:50)
+org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:178)
+org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:828)
+org.eclipse.jface.viewers.AbstractTreeViewer.handleDoubleSelect(AbstractTreeViewer.java:1472)
+org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1237)
+org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:252)
+org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:249)
+org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:311)
+org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4172)
+org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3761)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+***END of Exception Info***
+
+
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 15:11:56.092
+!MESSAGE USER_ACTION : Time taken for opening editor is: 264 msec 
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 15:12:20.842
+!MESSAGE USER_ACTION : Time taken for opening editor is: 269 msec 
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 15:20:56.881
+!MESSAGE USER_ACTION : Time taken for opening editor is: 40 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 15:34:00.022
+!MESSAGE USER_ACTION : App Getting Added: INTERRUPT [4.0.8]
+
+!ENTRY SOLVER 1 0 2016-06-25 15:34:00.044
+!MESSAGE USER_ACTION : Creating an APP: INTERRUPT [4.0.8]
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 15:34:00.179
+!MESSAGE USER_ACTION : CASE-1 PR->PR
+ CPU_CTRL_XMC1 [4.0.2] lStoreAppVersion: 4.0.6:p
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 15:34:00.291
+!MESSAGE USER_ACTION : Created APP: INTERRUPT [4.0.8]-->http://resources/4.0.8/app/INTERRUPT/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:00.422
+!MESSAGE Time taken for processing complete solver result is: 12 msec 
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:00.471
+!MESSAGE *****Serialization is called after successful solver action*****
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:00.476
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:00.665
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2016-06-25 15:34:00.728
+!MESSAGE Time Taken By Serialization  : 60 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:00.739
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:00.815
+!MESSAGE Time taken for serialization in msec: 344
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:34:00.877
+!MESSAGE USER_ACTION : Time taken for refreshing WATCHDOG/4.0.14/0 editor is : 4
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:34:00.886
+!MESSAGE USER_ACTION : Time taken for refreshing CLOCK_XMC1/4.0.14/0 editor is : 6
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:34:00.895
+!MESSAGE USER_ACTION : Time taken for refreshing UART/4.1.6/0 editor is : 6
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 15:34:04.303
+!MESSAGE USER_ACTION : Time taken for opening editor is: 176 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 15:34:22.997
+!MESSAGE USER_ACTION : Remove Option: Remove this APP and all APPs that are requiring it (Recursively up the tree)
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 15:34:23.075
+!MESSAGE USER_ACTION : Deleting resource : http://resources/4.0.8/app/INTERRUPT/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:23.193
+!MESSAGE Time taken for processing complete solver result is: 61 msec 
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:23.221
+!MESSAGE *****Serialization is called after successful solver action*****
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:23.245
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:23.322
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2016-06-25 15:34:23.380
+!MESSAGE Time Taken By Serialization  : 55 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:23.385
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:34:23.423
+!MESSAGE Time taken for serialization in msec: 202
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:34:23.448
+!MESSAGE USER_ACTION : Time taken for refreshing WATCHDOG/4.0.14/0 editor is : 3
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:34:23.458
+!MESSAGE USER_ACTION : Time taken for refreshing CLOCK_XMC1/4.0.14/0 editor is : 5
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:34:23.470
+!MESSAGE USER_ACTION : Time taken for refreshing UART/4.1.6/0 editor is : 7
+
+!ENTRY SOLVER 1 0 2016-06-25 15:34:23.475
+!MESSAGE Time Taken By Solver for UI Action: 391 ms
+
+!ENTRY APP_CONFIGURATOR 1 0 2016-06-25 15:39:12.245
+!MESSAGE USER_ACTION : Time taken for opening editor is: 40 msec 
+
+!ENTRY SIGNAL_CONFIG 1 0 2016-06-25 15:39:33.443
+!MESSAGE USER_ACTION : Opening HW Signal Connection Dialog.!
+
+!ENTRY SIGNAL_CONFIG 1 0 2016-06-25 15:39:36.164
+!MESSAGE USER_ACTION : HW Signal Connection Dialog is closed..!
+
+!ENTRY PIN_CONFIG 1 0 2016-06-25 15:39:37.363
+!MESSAGE USER_ACTION : Opening Manual Pin Allocator Dialog.!
+
+!ENTRY PIN_CONFIG 1 0 2016-06-25 15:39:39.876
+!MESSAGE USER_ACTION : Manual Pin Allocator Dialog is closed..!
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:50:04.042
+!MESSAGE USER_ACTION : Setting value = "false" of "gcheck_rx_callback" in APP: UART/4.1.6/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.050
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.053
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.074
+!MESSAGE Time taken for serialization in msec: 21
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.077
+!MESSAGE *****************************
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:50:04.833
+!MESSAGE USER_ACTION : Setting value = "true" of "gcheck_rx_callback" in APP: UART/4.1.6/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.838
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.841
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.888
+!MESSAGE Time taken for serialization in msec: 48
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:04.891
+!MESSAGE *****************************
+
+!ENTRY UI_EDITOR 1 0 2016-06-25 15:50:20.061
+!MESSAGE USER_ACTION : Setting value = "ISR_UART_Receive" of "gstring_rx_callback" in APP: UART/4.1.6/0
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:20.066
+!MESSAGE **************Serialization is called for successful UI action without Solver*********
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:20.069
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:20.089
+!MESSAGE Time taken for serialization in msec: 20
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 15:50:20.092
+!MESSAGE *****************************
+
+!ENTRY CODEGEN 1 0 2016-06-25 15:52:50.314
+!MESSAGE Code generation started...
+
+!ENTRY CODEGEN 1 0 2016-06-25 15:52:51.000
+!MESSAGE Code generation completed...
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 16:19:53.864
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 16:19:53.924
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2016-06-25 16:19:53.993
+!MESSAGE Time Taken By Serialization  : 66 ms :: C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Model\projectData.bin
+
+!ENTRY SOLVER 1 0 2016-06-25 16:19:54.032
+!MESSAGE Solver exited (0)
+
+!ENTRY SOLVER 1 0 2016-06-25 16:19:54.297
+!MESSAGE USER_ACTION : Solver Status: DISCONNECTED
+
+!ENTRY com.dave.mbs.common 1 0 2016-06-25 16:19:54.311
+!MESSAGE ****************Cleaning project data:XMC2AD9833*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2016-06-25 16:19:54.468
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 437 msec 
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2016-06-25 16:19:55.766
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor250.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.util.concurrent.RejectedExecutionException: Display org.eclipse.swt.widgets.Display@7c96c85 is disposed
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:85)
+	at org.eclipse.cdt.dsf.ui.viewmodel.AbstractVMAdapter.handleEvent(AbstractVMAdapter.java:260)
+	at org.eclipse.cdt.dsf.ui.viewmodel.datamodel.AbstractDMVMAdapter.eventDispatched(AbstractDMVMAdapter.java:103)
+	... 13 more
+Caused by: org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1258)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:709)
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:77)
+	... 15 more
+Root exception:
+java.util.concurrent.RejectedExecutionException: Display org.eclipse.swt.widgets.Display@7c96c85 is disposed
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:85)
+	at org.eclipse.cdt.dsf.ui.viewmodel.AbstractVMAdapter.handleEvent(AbstractVMAdapter.java:260)
+	at org.eclipse.cdt.dsf.ui.viewmodel.datamodel.AbstractDMVMAdapter.eventDispatched(AbstractDMVMAdapter.java:103)
+	at sun.reflect.GeneratedMethodAccessor250.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1258)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:709)
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:77)
+	... 15 more

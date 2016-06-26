@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gbMainFreqSetting = new System.Windows.Forms.GroupBox();
+            this.gbOutputEnable = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnEnableOutput = new System.Windows.Forms.Button();
+            this.btnDisableOutput = new System.Windows.Forms.Button();
             this.gbOutVoltage = new System.Windows.Forms.GroupBox();
             this.tblLayPnlOutVoltage = new System.Windows.Forms.TableLayoutPanel();
             this.tbOutVoltage = new System.Windows.Forms.TrackBar();
@@ -66,11 +70,9 @@
             this.toolStripStatusSerialPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerSerialConnect = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.gbOutputEnable = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnEnableOutput = new System.Windows.Forms.Button();
-            this.btnDisableOutput = new System.Windows.Forms.Button();
             this.gbMainFreqSetting.SuspendLayout();
+            this.gbOutputEnable.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.gbOutVoltage.SuspendLayout();
             this.tblLayPnlOutVoltage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOutVoltage)).BeginInit();
@@ -87,8 +89,6 @@
             this.gbWaveForm.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.gbOutputEnable.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMainFreqSetting
@@ -105,6 +105,59 @@
             this.gbMainFreqSetting.TabIndex = 0;
             this.gbMainFreqSetting.TabStop = false;
             this.gbMainFreqSetting.Text = "Main Frequency";
+            // 
+            // gbOutputEnable
+            // 
+            this.gbOutputEnable.Controls.Add(this.tableLayoutPanel1);
+            this.gbOutputEnable.Location = new System.Drawing.Point(176, 205);
+            this.gbOutputEnable.Name = "gbOutputEnable";
+            this.gbOutputEnable.Size = new System.Drawing.Size(179, 96);
+            this.gbOutputEnable.TabIndex = 13;
+            this.gbOutputEnable.TabStop = false;
+            this.gbOutputEnable.Text = "Output Enable";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnEnableOutput, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnDisableOutput, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(173, 77);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnEnableOutput
+            // 
+            this.btnEnableOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEnableOutput.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEnableOutput.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnableOutput.ForeColor = System.Drawing.Color.Green;
+            this.btnEnableOutput.Location = new System.Drawing.Point(3, 3);
+            this.btnEnableOutput.Name = "btnEnableOutput";
+            this.btnEnableOutput.Size = new System.Drawing.Size(167, 32);
+            this.btnEnableOutput.TabIndex = 0;
+            this.btnEnableOutput.Text = "Enable";
+            this.btnEnableOutput.UseVisualStyleBackColor = true;
+            this.btnEnableOutput.Click += new System.EventHandler(this.OutputEnable_Clicked);
+            // 
+            // btnDisableOutput
+            // 
+            this.btnDisableOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDisableOutput.Enabled = false;
+            this.btnDisableOutput.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDisableOutput.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDisableOutput.Location = new System.Drawing.Point(3, 41);
+            this.btnDisableOutput.Name = "btnDisableOutput";
+            this.btnDisableOutput.Size = new System.Drawing.Size(167, 33);
+            this.btnDisableOutput.TabIndex = 1;
+            this.btnDisableOutput.Text = "Disable";
+            this.btnDisableOutput.UseVisualStyleBackColor = true;
+            this.btnDisableOutput.Click += new System.EventHandler(this.OutputEnable_Clicked);
             // 
             // gbOutVoltage
             // 
@@ -596,58 +649,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // gbOutputEnable
-            // 
-            this.gbOutputEnable.Controls.Add(this.tableLayoutPanel1);
-            this.gbOutputEnable.Location = new System.Drawing.Point(176, 205);
-            this.gbOutputEnable.Name = "gbOutputEnable";
-            this.gbOutputEnable.Size = new System.Drawing.Size(179, 96);
-            this.gbOutputEnable.TabIndex = 13;
-            this.gbOutputEnable.TabStop = false;
-            this.gbOutputEnable.Text = "Output Enable";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnEnableOutput, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnDisableOutput, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(173, 77);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnEnableOutput
-            // 
-            this.btnEnableOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnEnableOutput.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEnableOutput.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnableOutput.Location = new System.Drawing.Point(3, 3);
-            this.btnEnableOutput.Name = "btnEnableOutput";
-            this.btnEnableOutput.Size = new System.Drawing.Size(167, 32);
-            this.btnEnableOutput.TabIndex = 0;
-            this.btnEnableOutput.Text = "Enable";
-            this.btnEnableOutput.UseVisualStyleBackColor = true;
-            this.btnEnableOutput.Click += new System.EventHandler(this.OutputEnable_Clicked);
-            // 
-            // btnDisableOutput
-            // 
-            this.btnDisableOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDisableOutput.Enabled = false;
-            this.btnDisableOutput.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDisableOutput.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDisableOutput.Location = new System.Drawing.Point(3, 41);
-            this.btnDisableOutput.Name = "btnDisableOutput";
-            this.btnDisableOutput.Size = new System.Drawing.Size(167, 33);
-            this.btnDisableOutput.TabIndex = 1;
-            this.btnDisableOutput.Text = "Disable";
-            this.btnDisableOutput.UseVisualStyleBackColor = true;
-            this.btnDisableOutput.Click += new System.EventHandler(this.OutputEnable_Clicked);
-            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -664,6 +665,8 @@
             this.Text = "AD9833 Control";
             this.gbMainFreqSetting.ResumeLayout(false);
             this.gbMainFreqSetting.PerformLayout();
+            this.gbOutputEnable.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.gbOutVoltage.ResumeLayout(false);
             this.tblLayPnlOutVoltage.ResumeLayout(false);
             this.tblLayPnlOutVoltage.PerformLayout();
@@ -684,8 +687,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.gbOutputEnable.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -249,13 +249,17 @@ namespace AD9833Control
             {
                 outputEnabled = true;
                 btnEnableOutput.Enabled = false;
+                btnEnableOutput.ForeColor = Color.Gray;
                 btnDisableOutput.Enabled = true;
+                btnDisableOutput.ForeColor = Color.Red;
             }
             else if (sender.Equals(btnDisableOutput))
             {
                 outputEnabled = false;
                 btnEnableOutput.Enabled = true;
+                btnEnableOutput.ForeColor = Color.Green;
                 btnDisableOutput.Enabled = false;
+                btnDisableOutput.ForeColor = Color.Gray;
             }
             adjustFreq();
         }

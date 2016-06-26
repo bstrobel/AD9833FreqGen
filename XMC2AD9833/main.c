@@ -41,6 +41,8 @@ int main(void) {
 	AD9833_StartSPI();
 	AD9833_Reset();
 
+	// clear the receive buffer
+	memset(rec_data, 0, BUFF_SIZE);
 
 	/* Main loop */
 	while (1U) {
@@ -55,12 +57,77 @@ int main(void) {
 			WATCHDOG_Start();
 			continue;
 		case UART_STATUS_SUCCESS:
-			// In case the watchdog was fired, stop and reset it.
-			WATCHDOG_Stop();
-			WATCHDOG_Service();
-			// Go to sleep until the next interrupt
-			__WFI();
-			break;
+			{
+				// In case the watchdog was fired, stop and reset it.
+				WATCHDOG_Stop();
+				WATCHDOG_Service();
+				// Go to sleep until the next interrupt
+				__WFI();
+				// Processing input after interrupt has been serviced
+				if (rec_data_idx > 0 && rec_data[rec_data_idx-1] == '\r') {
+					// We have received a terminated command string, process it!
+					UART_TransmitWord(&UART_0, '\n'); // Newline for the terminal
+					rec_data[rec_data_idx-1] = 0; // terminate the string with a 0x0
+					rec_data_idx = 0;
+					if (rec_data[0] == 0) {
+						continue; // Nothing to do
+					}
+					NVIC_DisableIRQ((IRQn_Type)10);
+					char* ptr = strtok(rec_data, separators);
+					uint8_t idx = 0;
+					char* tk[4];
+					while (idx < 4 && ptr != NULL) {
+						tk[idx++] = ptr;
+						ptr = strtok(NULL, separators);
+					}
+
+					AD9833_StartSPI();
+					if (idx > 0)
+					{
+						AD9833_SetFreq(0, atoi(tk[1]));
+					}
+
+					uint8_t output = 0;
+					if (idx>2)
+					{
+						output = atoi(tk[2]);
+					}
+
+					if (tk[0] != NULL) {
+						switch (tk[0][0]) {
+						case 's':
+							AD9833_SelFreqPhase(0, 0, SINUS);
+							MCP41010_StartSPI();
+							MCP41010_set(output);
+							DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
+							break;
+						case 't':
+							AD9833_SelFreqPhase(0, 0, TRIANGLE);
+							MCP41010_StartSPI();
+							MCP41010_set(output);
+							DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
+							break;
+						case 'q':
+							AD9833_SelFreqPhase(0, 0, SQUARE);
+							MCP41010_StartSPI();
+							MCP41010_set(output);
+							DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
+							break;
+						default:
+						case 'r':
+							AD9833_Reset();
+							MCP41010_StartSPI();
+							MCP41010_set(0);
+							DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1);
+							break;
+						}
+						DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
+					}
+					memset(rec_data, 0, BUFF_SIZE);
+					NVIC_EnableIRQ((IRQn_Type)10);
+				}
+				break;
+			}
 		}
 	}
 }
@@ -68,12 +135,8 @@ int main(void) {
 /**
  * Handle data received via UART
  */
-void ISR_UART_0_Receive(void)
+void ISR_UART_Receive(void)
 {
-	// we ignore this character
-	if (inchar == '\n')
-		return;
-
 	// handle backspace and DEL
 	// makes handling from a terminal easier.
 	if (inchar == 127 || inchar == 8)
@@ -86,65 +149,15 @@ void ISR_UART_0_Receive(void)
 		}
 		else
 		{
-			UART_TransmitWord(&UART_0, 7); // beep
+			UART_TransmitWord(&UART_0, 7);
 		}
 		return;
 	}
 
-	rec_data[rec_data_idx] = inchar;
-	UART_TransmitWord(&UART_0, inchar);
-	if (rec_data[rec_data_idx] == '\r' || rec_data[rec_data_idx] == 0) {
-		if (rec_data[0] == 0)
-			return;
-		//We received a command or the buffer was full. Start parsing it!
-		rec_data[rec_data_idx] = 0; // terminate the string with a 0x0
-		//UART_Transmit(&UART_0, (uint8_t*) rec_data, rec_data_idx + 1);
-		UART_TransmitWord(&UART_0, '\r');
-		UART_TransmitWord(&UART_0, '\n');
-		rec_data_idx = 0;
-		char* ptr = strtok(rec_data, separators);
-		uint8_t idx = 0;
-		char* tk[4];
-		while (idx < 4 && ptr != NULL) {
-			tk[idx++] = ptr;
-			ptr = strtok(NULL, separators);
-		}
-
-		AD9833_StartSPI();
-		if (idx > 0)
-		{
-			AD9833_SetFreq(0, atoi(tk[1]));
-		}
-
-		if (tk[0] != NULL) {
-			switch (tk[0][0]) {
-			case 's':
-				AD9833_SelFreqPhase(0, 0, SINUS);
-				break;
-			case 't':
-				AD9833_SelFreqPhase(0, 0, TRIANGLE);
-				break;
-			case 'q':
-				AD9833_SelFreqPhase(0, 0, SQUARE);
-				break;
-			default:
-			case 'r':
-				AD9833_Reset();
-				memset(rec_data, 0, BUFF_SIZE);
-				DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1);
-				return;
-			}
-			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
-		}
-		uint8_t output = 127;
-		if (idx>2)
-		{
-			output = atoi(tk[2]);
-		}
-		MCP41010_StartSPI();
-		MCP41010_set(output);
-		memset(rec_data, 0, BUFF_SIZE);
-	} else {
+	// we ignore this character
+	if (inchar != '\n')
+	{
+		rec_data[rec_data_idx] = inchar;
 		rec_data_idx++;
 		if (rec_data_idx >= BUFF_SIZE) {
 			UART_Transmit(&UART_0, (uint8_t*) err_msg_buff_ovflw,
@@ -152,4 +165,5 @@ void ISR_UART_0_Receive(void)
 			rec_data_idx = 0;
 		}
 	}
+	UART_TransmitWord(&UART_0, inchar);
 }

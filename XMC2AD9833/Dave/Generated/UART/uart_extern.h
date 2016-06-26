@@ -65,7 +65,7 @@ extern "C" {
 #endif
   
 /*Extern declaration for callback functions and UART APP instance handles*/
-  extern void ISR_UART_0_Receive(void);
+  extern void ISR_UART_Receive(void);
 
   extern UART_t UART_0; 
                     

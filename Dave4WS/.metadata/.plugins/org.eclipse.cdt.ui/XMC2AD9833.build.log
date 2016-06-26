@@ -1,29 +1,11 @@
-14:02:27 **** Incremental Build of configuration Debug for project XMC2AD9833 ****
+16:14:05 **** Incremental Build of configuration Debug for project XMC2AD9833 ****
 "\"C:\\Programs\\Dave4\\eclipse\\ARM-GCC-49\\bin\\make\"" --output-sync -j4 all 
-'Building file: ../main.c'
-'Invoking: ARM-GCC C Compiler'
-"C:\Programs\Dave4\eclipse\ARM-GCC-49/bin/arm-none-eabi-gcc" -MMD -MT "main.o" -DXMC1100_Q024x0064 -I"C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Libraries\XMCLib\inc" -I"C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833/Libraries/CMSIS/Include" -I"C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833/Libraries/CMSIS/Infineon/XMC1100_series/Include" -I"C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833" -I"C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Dave\Generated" -I"C:\Users\Bernd\Documents\AD9833DDS\AD9833FreqGen\XMC2AD9833\Libraries" -O0 -ffunction-sections -fdata-sections -Wall -std=gnu99 -Wa,-adhlns="main.o.lst" -pipe -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d main.o" -mcpu=cortex-m0 -mthumb -g -gdwarf-2 -o "main.o" "../main.c"
-'Finished building: ../main.c'
-
-'Building target: XMC2AD9833.elf'
-'Invoking: ARM-GCC C Linker'
-"C:\Programs\Dave4\eclipse\ARM-GCC-49/bin/arm-none-eabi-gcc" -T"../linker_script.ld" -nostartfiles -Xlinker --gc-sections -specs=nano.specs -specs=nosys.specs -Wl,-Map,XMC2AD9833.map -mcpu=cortex-m0 -mthumb -g -gdwarf-2 -o "XMC2AD9833.elf" "@objects.rsp"  -lm
-'Finished building target: XMC2AD9833.elf'
-
 'Invoking: ARM-GCC Print Size'
 "C:\Programs\Dave4\eclipse\ARM-GCC-49/bin/arm-none-eabi-size"  --format=berkeley "XMC2AD9833.elf"
    text	   data	    bss	    dec	    hex	filename
-  11587	    188	   1124	  12899	   3263	XMC2AD9833.elf
+  11739	    188	   1124	  13051	   32fb	XMC2AD9833.elf
 'Finished building: XMC2AD9833.siz'
 
-'Invoking: ARM-GCC Create Flash Image'
-"C:\Programs\Dave4\eclipse\ARM-GCC-49/bin/arm-none-eabi-objcopy" -O ihex "XMC2AD9833.elf"  "XMC2AD9833.hex"
-'Finished building: XMC2AD9833.hex'
 
-'Invoking: ARM-GCC Create Listing'
-"C:\Programs\Dave4\eclipse\ARM-GCC-49/bin/arm-none-eabi-objdump" -h -S "XMC2AD9833.elf" > "XMC2AD9833.lst"
-'Finished building: XMC2AD9833.lst'
-
-
-14:02:27 Build Finished (took 524ms)
+16:14:05 Build Finished (took 285ms)
 
