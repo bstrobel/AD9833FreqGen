@@ -115,7 +115,11 @@ int main(void) {
  * @brief ISR_UART_Receive() - Handle data received via UART
  *
  * <b>Details of function</b><br>
- *
+ * Reads the received char from the UART and puts it in the receive buffer rec_data[].
+ * Echos the received char back to UART.
+ * Parses the receive buffer into the global configuration variables (wf, freq, output).
+ * Sets the flag newData and clears the receive buffer if the parsing was successful.
+ * Activates LED2 if there was a parsing problem or a buffer overflow.
  */
 void ISR_UART_Receive(void)
 {

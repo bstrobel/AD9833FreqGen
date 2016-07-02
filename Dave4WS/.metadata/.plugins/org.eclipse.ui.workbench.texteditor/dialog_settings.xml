@@ -8,10 +8,19 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value=";"/>
+			<item value="="/>
+			<item value="const char"/>
+			<item value="&quot;"/>
+			<item value="string"/>
 			<item value="ISR_UART"/>
 			<item value="fptr_uart_config"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="#define"/>
+			<item value="&apos;"/>
+			<item value="char"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

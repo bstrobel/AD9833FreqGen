@@ -41,13 +41,13 @@ namespace AD9833Control
             interactiveControls.Add(rbWfSquare);
             interactiveControls.Add(rbWfTriangular);
 
-            tbFreqHz1.Scroll += freqSliderMoved;
-            tbFreqHz10.Scroll += freqSliderMoved;
-            tbFreqHz100.Scroll += freqSliderMoved;
-            tbFreqkHz1.Scroll += freqSliderMoved;
-            tbFreqkHz10.Scroll += freqSliderMoved;
-            tbFreqkHz100.Scroll += freqSliderMoved;
-            tbFreqMHz.Scroll += freqSliderMoved;
+            tbFreqHz1.ValueChanged += freqSliderMoved;
+            tbFreqHz10.ValueChanged += freqSliderMoved;
+            tbFreqHz100.ValueChanged += freqSliderMoved;
+            tbFreqkHz1.ValueChanged += freqSliderMoved;
+            tbFreqkHz10.ValueChanged += freqSliderMoved;
+            tbFreqkHz100.ValueChanged += freqSliderMoved;
+            tbFreqMHz.ValueChanged += freqSliderMoved;
             tbFreqAdjust.Scroll += freqSliderMoved;
             tbOutVoltage.Scroll += voltageSliderMoved;
             ctrl.SerialPortStatusChanged += Ctrl_SerialPortStatusChanged;
@@ -182,19 +182,12 @@ namespace AD9833Control
         private void setFreqSliders(int centerFreq, int adjustFactor)
         {
             tbFreqMHz.Value = centerFreq / 1000000;
-            lblFreqSbMHz.Text = String.Format("{0:N0} MHz", centerFreq / 1000000);
             tbFreqkHz100.Value = (centerFreq / 100000) % 10;
-            lblFreqSbkHz100.Text = String.Format("{0:N0}00 kHz", (centerFreq / 100000) % 10);
             tbFreqkHz10.Value = (centerFreq / 10000) % 10;
-            lblFreqSbkHz10.Text = String.Format("{0:N0}0 kHz", (centerFreq / 10000) % 10);
             tbFreqkHz1.Value = (centerFreq / 1000) % 10;
-            lblFreqSbkHz1.Text = String.Format("{0:N0} kHz", (centerFreq / 1000) % 10);
             tbFreqHz100.Value = (centerFreq / 100) % 10;
-            lblFreqSbHz100.Text = String.Format("{0:N0}00 Hz", (centerFreq / 100) % 10);
             tbFreqHz10.Value = (centerFreq / 10) % 10;
-            lblFreqSbHz10.Text = String.Format("{0:N0}0 Hz", (centerFreq / 10) % 10);
             tbFreqHz1.Value = centerFreq % 10;
-            lblFreqSbHz1.Text = String.Format("{0:N0} Hz", centerFreq % 10);
             tbFreqAdjust.Value = adjustFactor;
             lblAdjFreqLow.Text = String.Format("{0:N0}", centerFreq / 10);
             int highFreqVal = centerFreq * 10;
@@ -205,13 +198,13 @@ namespace AD9833Control
 
         private void adjustFreq()
         {
-            int centerFreq = tbFreqHz1.Value
-               + tbFreqHz10.Value * 10
-               + tbFreqHz100.Value * 100
-               + tbFreqkHz1.Value * 1000
-               + tbFreqkHz10.Value * 10000
-               + tbFreqkHz100.Value * 100000
-               + tbFreqMHz.Value * 1000000;
+            int centerFreq = (int)tbFreqHz1.Value
+               + (int)tbFreqHz10.Value * 10
+               + (int)tbFreqHz100.Value * 100
+               + (int)tbFreqkHz1.Value * 1000
+               + (int)tbFreqkHz10.Value * 10000
+               + (int)tbFreqkHz100.Value * 100000
+               + (int)tbFreqMHz.Value * 1000000;
             int adjustFactor = tbFreqAdjust.Value;
             settings.LastFreq = centerFreq;
             settings.LastAdjustFreq = adjustFactor;
