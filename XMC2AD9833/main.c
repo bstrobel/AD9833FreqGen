@@ -23,17 +23,20 @@
 
 #define BUFF_SIZE 25
 #define MAX_NUM_PARAM 3
+#define MAX_UART_ERR 250
 char err_msg_buff_ovflw[] = "ERR:Input Buffer Overflow\r\n";
 char err_msg_processing_ovflw[] = "ERR:Processing Overflow\r\n";
 char err_msg_unkown_cmd[] = "ERR:Unknown Command\r\n";
+char ack_msg_format_str[] = "ACK:%d%c%d%c%d%c%c";
 char separators[] = { S };
 char rec_data[BUFF_SIZE];
 uint8_t rec_data_idx = 0;
 uint8_t inchar = 0;
-char wf = CMD_RESET;
+enum AD9833_OUT_TYPE wf = RESET;
 int freq = 0;
 int output = 0;
 bool newData = false;
+int uart_error_cnt = 0;
 
 /**
 
@@ -67,61 +70,41 @@ int main(void) {
 		default:
 		case UART_STATUS_FAILURE:
 		case UART_STATUS_BUSY:
-			// We shouldn't be here. Start the Watchdog and see what happens.
-			WATCHDOG_Start();
-			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
+			uart_error_cnt++;
+			if (uart_error_cnt > MAX_UART_ERR)
+			{
+				NVIC_SystemReset();
+			}
 			continue;
 		case UART_STATUS_SUCCESS:
-				break;
+			uart_error_cnt = 0;
+			break;
 		}
 		// Now wait for the interrupt
 		__WFI();
-		// In case the watchdog was fired, stop and reset it.
-		WATCHDOG_Stop();
-		WATCHDOG_Service();
 
 		// Processing input after interrupt has been serviced
 		if (newData) {
-			// We have received a terminated command string, process it!
-			UART_TransmitWord(&UART_0, T_NL); // Newline for the terminal
 
 			AD9833_StartSPI();
-			switch (wf) {
-			case CMD_WF_SINE:
-				AD9833_SetFreq(0, freq);
-				AD9833_SelFreqPhase(0, 0, SINUS);
-				MCP41010_StartSPI();
-				MCP41010_set(output);
-				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
-				break;
-			case CMD_WF_TRIANGULAR:
-				AD9833_SetFreq(0, freq);
-				AD9833_SelFreqPhase(0, 0, TRIANGLE);
-				MCP41010_StartSPI();
-				MCP41010_set(output);
-				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
-				break;
-			case CMD_WF_SQUARE:
-				AD9833_SetFreq(0, freq);
-				AD9833_SelFreqPhase(0, 0, SQUARE);
-				MCP41010_StartSPI();
-				MCP41010_set(output);
-				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
-				break;
-			case CMD_RESET:
+			if (wf == RESET)
+			{
 				AD9833_Reset();
 				MCP41010_StartSPI();
 				MCP41010_set(0);
 				DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1); //LED1 off
-				break;
-			default:
-				//do nothing
-				break;
+			}
+			else
+			{
+				AD9833_SetFreq(0, freq);
+				AD9833_SelFreqPhase(0, 0, wf);
+				MCP41010_StartSPI();
+				MCP41010_set(output);
+				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
 			}
 			DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED2); // LED2 off
-			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1);
 			char echo_str[BUFF_SIZE];
-			uint len = snprintf(echo_str, BUFF_SIZE, "ACK:%c%c%d%c%d%c%c", wf, S, freq, S, output, T, T_NL);
+			uint len = snprintf(echo_str, BUFF_SIZE, ack_msg_format_str, wf, S, freq, S, output, T, T_NL);
 			UART_Transmit(&UART_0, (uint8_t*) echo_str, len);
 			newData = false;
 		}
@@ -129,7 +112,10 @@ int main(void) {
 }
 
 /**
- * Handle data received via UART
+ * @brief ISR_UART_Receive() - Handle data received via UART
+ *
+ * <b>Details of function</b><br>
+ *
  */
 void ISR_UART_Receive(void)
 {
@@ -197,15 +183,21 @@ void ISR_UART_Receive(void)
 			ptr = strtok(NULL, separators);
 		}
 		if (tk[0] != NULL) {
-			wf = tk[0][0];
 			freq = 0;
 			output = 0;
-			switch (wf)
+			switch (tk[0][0])
 			{
 			case CMD_WF_SINE:
+				wf = SINUS;
+				break;
 			case CMD_WF_TRIANGULAR:
+				wf = TRIANGLE;
+				break;
 			case CMD_WF_SQUARE:
+				wf = SQUARE;
+				break;
 			case CMD_RESET:
+				wf = RESET;
 				break;
 			default:
 				// unknown command, so get out of here
@@ -221,6 +213,7 @@ void ISR_UART_Receive(void)
 				freq = atoi(tk[1]);
 			if (idx > 1)
 				output = atoi(tk[2]);
+			UART_TransmitWord(&UART_0, T_NL); // Newline for the terminal
 			newData = true;
 		}
 		rec_data_idx = 0;

@@ -48,7 +48,6 @@
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="RTCCLKSEL" URI="http://resources/1.0.1/peripheral/scu/0/clkcr/rtcclksel" value="0" toolTipHelpDescription="RTC Clock Select" defaultValue="0" startPos="17" stopPos="19" accessPermission="rw" maxValue="7" minValue="0"/>
   <provided xsi:type="ResourceModel:ResourceGroup" name="PREWARN" URI="http://resources/1.0.1/peripheral/scu/0/gcu/interrupt/prewarn">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/WATCHDOG/v4_0_14/WATCHDOG_0.app#//@hwResources.1"/>
     <resourcesList name="srraw_int" requiredResourceUri="http://resources/1.0.1/peripheral/scu/0/srraw/prwarn"/>
     <resourcesList name="srclr_int" requiredResourceUri="http://resources/1.0.1/peripheral/scu/0/srclr/prwarn"/>
     <resourcesList name="srset_int" requiredResourceUri="http://resources/1.0.1/peripheral/scu/0/srset/prwarn"/>
