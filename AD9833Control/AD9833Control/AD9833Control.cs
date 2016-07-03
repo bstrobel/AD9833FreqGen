@@ -17,6 +17,8 @@ namespace AD9833Control
         private const string CMD_WF_SINE = "s";
         private const string CMD_WF_TRIANGULAR = "t";
         private const string CMD_WF_SQUARE = "q";
+        private const string CMD_INTERACTIVE_ON = "i";
+        private const string CMD_INTERACTIVE_OFF = "I";
         public const long MAX_FREQ = 12500000;
         public const short MAX_VOLTAGE = 255;
         private long _frequency = 0;
@@ -106,9 +108,14 @@ namespace AD9833Control
 
         public event EventHandler<SerialPortStatusChangedEventArgs> SerialPortStatusChanged;
 
+        protected virtual void OnSerialPortStatusChanged(String ackMsg)
+        {
+            SerialPortStatusChanged?.Invoke(this, new SerialPortStatusChangedEventArgs(_serialPortStatus, ackMsg, null));
+        }
+
         protected virtual void OnSerialPortStatusChanged(Exception ex)
         {
-            SerialPortStatusChanged?.Invoke(this, new SerialPortStatusChangedEventArgs(_serialPortStatus, ex));
+            SerialPortStatusChanged?.Invoke(this, new SerialPortStatusChangedEventArgs(_serialPortStatus, null, ex));
         }
 
         private void openSerialPort()
@@ -118,9 +125,13 @@ namespace AD9833Control
                 if (serialPort == null)
                     serialPort = new SerialPort(settings.COMPort, settings.BaudRate, Parity.None, 8, StopBits.One);
                 if (!serialPort.IsOpen)
+                {
                     serialPort.Open();
-                _serialPortStatus = SerialPortStatus.Open;
-                OnSerialPortStatusChanged(null);
+                    serialPort.Write(CMD_INTERACTIVE_OFF + T); // switch interactive mode off
+                    String ack = serialPort.ReadLine();
+                    _serialPortStatus = SerialPortStatus.Open;
+                    OnSerialPortStatusChanged(ack);
+                }
             }
             catch (IOException ex)
             {
@@ -140,8 +151,13 @@ namespace AD9833Control
             {
                 if (!serialPort.IsOpen)
                     openSerialPort();
+                String ack = null;
                 if (_serialPortStatus == SerialPortStatus.Open)
+                {
                     serialPort.Write(CMD_RESET + T);
+                    ack = serialPort.ReadLine();
+                }
+                OnSerialPortStatusChanged(ack);
                 return;
             }
             if (Frequency > 0)
@@ -168,8 +184,13 @@ namespace AD9833Control
                 }
                 if (!serialPort.IsOpen)
                     openSerialPort();
+                String ack = null;
                 if (_serialPortStatus == SerialPortStatus.Open)
+                {
                     serialPort.Write(sWaveForm + S + _frequency + S + _outVoltage + T);
+                    ack = serialPort.ReadLine();
+                }
+                OnSerialPortStatusChanged(ack);
             }
 
         }

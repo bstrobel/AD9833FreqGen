@@ -13,12 +13,16 @@ namespace AD9833Control
 {
     public partial class MainWindowForm : Form
     {
+        private const short UPP_DEFAULT_MAX_VALUE = 255;
         private const short UPP_1V_VALUE = 144;
-        private const short UPP_MAX_VALUE = 218;
+        private const short UPP_SQR_1V_VALUE = 25;
+        private const short UPP_DEFAULT_WARN_VALUE = 218;
+        private const short UPP_SQR_MAX_VALUE = 42;
         private Color displayTextColor = SystemColors.Info;
         private Color displayTextWarnColor = Color.Orange;
         private IAD9833ControlModel ctrl;
         private bool outputEnabled = false;
+        private SerialPortStatus connectedState = SerialPortStatus.Closed;
         private AD9833ControlSettings settings = new AD9833ControlSettings();
         private List<Control> interactiveControls = new List<Control>();
         public MainWindowForm(AD9833Control ctrl)
@@ -41,17 +45,17 @@ namespace AD9833Control
             interactiveControls.Add(rbWfSquare);
             interactiveControls.Add(rbWfTriangular);
 
-            tbFreqHz1.ValueChanged += freqSliderMoved;
-            tbFreqHz10.ValueChanged += freqSliderMoved;
-            tbFreqHz100.ValueChanged += freqSliderMoved;
-            tbFreqkHz1.ValueChanged += freqSliderMoved;
-            tbFreqkHz10.ValueChanged += freqSliderMoved;
-            tbFreqkHz100.ValueChanged += freqSliderMoved;
-            tbFreqMHz.ValueChanged += freqSliderMoved;
+            tbFreqHz1.ValueChanged += TbFreqInput_ValueChanged; ;
+            tbFreqHz10.ValueChanged += TbFreqInput_ValueChanged;
+            tbFreqHz100.ValueChanged += TbFreqInput_ValueChanged;
+            tbFreqkHz1.ValueChanged += TbFreqInput_ValueChanged;
+            tbFreqkHz10.ValueChanged += TbFreqInput_ValueChanged;
+            tbFreqkHz100.ValueChanged += TbFreqInput_ValueChanged;
+            tbFreqMHz.ValueChanged += TbFreqInput_ValueChanged;
             tbFreqAdjust.Scroll += freqSliderMoved;
             tbOutVoltage.Scroll += voltageSliderMoved;
             ctrl.SerialPortStatusChanged += Ctrl_SerialPortStatusChanged;
-            Ctrl_SerialPortStatusChanged(null, new SerialPortStatusChangedEventArgs(ctrl.SerialPortStatus, null));
+            Ctrl_SerialPortStatusChanged(null, new SerialPortStatusChangedEventArgs(ctrl.SerialPortStatus, null, null));
             timerSerialConnect.Tick += TimerSerialConnect_Tick;
             foreach (RadioButton rb in gbWaveForm.Controls.OfType<RadioButton>())
             {
@@ -68,17 +72,25 @@ namespace AD9833Control
                 default:
                 case WaveFormsEnum.Sine:
                     rbWfSine.Checked = true;
+                    tbOutVoltage.Maximum = UPP_DEFAULT_MAX_VALUE;
+                    progBarOutVoltage.Maximum = UPP_DEFAULT_MAX_VALUE;
+                    progBarOutVoltage.WarningLevel = UPP_DEFAULT_WARN_VALUE;
                     break;
                 case WaveFormsEnum.Triangular:
                     rbWfTriangular.Checked = true;
+                    tbOutVoltage.Maximum = UPP_DEFAULT_MAX_VALUE;
+                    progBarOutVoltage.Maximum = UPP_DEFAULT_MAX_VALUE;
+                    progBarOutVoltage.WarningLevel = UPP_DEFAULT_WARN_VALUE;
                     break;
                 case WaveFormsEnum.Square:
-                    rbWfTriangular.Checked = true;
+                    rbWfSquare.Checked = true;
+                    tbOutVoltage.Maximum = UPP_SQR_MAX_VALUE;
+                    progBarOutVoltage.Maximum = UPP_SQR_MAX_VALUE;
+                    progBarOutVoltage.WarningLevel = UPP_SQR_MAX_VALUE;
                     break;
             }
             ctrl.WaveForm = wf;
             FormClosing += MainWindowForm_FormClosing;
-            progBarOutVoltage.WarningLevel = UPP_MAX_VALUE;
 
             // disables the flickering of the ProgressBar. I know, this is kind of an ugly solution...
             // http://stackoverflow.com/questions/2834761/disable-winforms-progressbar-animation
@@ -91,35 +103,59 @@ namespace AD9833Control
 
         private void TimerSerialConnect_Tick(object sender, EventArgs e)
         {
-            var state = ctrl.SerialPortStatus;
+
+            SerialPortStatus newState = ctrl.SerialPortStatus;
+            switch (newState)
+            {
+                case SerialPortStatus.Open:
+                    if (connectedState == SerialPortStatus.Closed)
+                    {
+
+                        foreach (var item in interactiveControls)
+                        {
+                            item.Enabled = true;
+                        }
+                        toolStripStatusSerialPort.Text = settings.COMPort + ": Connected";
+                        toolStripStatusSerialPort.ToolTipText = null;
+                        setFreqSliders(settings.LastFreq, settings.LastAdjustFreq);
+                        adjustFreq();
+                    }
+                    break;
+                case SerialPortStatus.Closed:
+                    if (connectedState == SerialPortStatus.Open)
+                    {
+                        foreach (var item in interactiveControls)
+                        {
+                            item.Enabled = false;
+                        }
+                        gbMainFreqSetting.Enabled = true;
+                        toolStripStatusSerialPort.Text = settings.COMPort + ": Disconnected";
+                    }
+                    break;
+                default:
+                    toolStripStatusSerialPort.Text = settings.COMPort + ": Undefined";
+                    break;
+            }
+            connectedState = newState;
         }
 
         private void Ctrl_SerialPortStatusChanged(object sender, SerialPortStatusChangedEventArgs e)
         {
-            switch (e.status)
+            switch(e.status)
             {
                 case SerialPortStatus.Open:
-                    foreach (var item in interactiveControls)
+                    if (e.ackMsg != null)
                     {
-                        item.Enabled = true;
+                        textBoxLogger.AppendText(e.ackMsg + "\n");
+                        toolStripStatusSerialPort.ToolTipText = e.ackMsg;
                     }
-                    toolStripStatusSerialPort.Text = settings.COMPort + ": Connected";
-                    toolStripStatusSerialPort.ToolTipText = null;
-                    setFreqSliders(settings.LastFreq, settings.LastAdjustFreq);
-                    adjustFreq();
                     break;
                 case SerialPortStatus.Closed:
-                    foreach (var item in interactiveControls)
+                    if (e.exception != null)
                     {
-                        item.Enabled = false;
+                        textBoxLogger.AppendText(e.exception.ToString());
+                        toolStripStatusSerialPort.ToolTipText = e.exception.Message;
                     }
-                    gbMainFreqSetting.Enabled = true;
-                    toolStripStatusSerialPort.Text = settings.COMPort + ": Disconnected";
-                    toolStripStatusSerialPort.ToolTipText = e.exception?.Message;
-                    break;
-                default:
-                    toolStripStatusSerialPort.Text = settings.COMPort + ": Undefined";
-                    toolStripStatusSerialPort.ToolTipText = null;
                     break;
             }
         }
@@ -142,6 +178,21 @@ namespace AD9833Control
                 wf = WaveFormsEnum.Square;
             ctrl.WaveForm = wf;
             settings.LastWaveForm = (int)wf;
+            switch (wf)
+            {
+                case WaveFormsEnum.Square:
+                    tbOutVoltage.Maximum = UPP_SQR_MAX_VALUE;
+                    progBarOutVoltage.Maximum = UPP_SQR_MAX_VALUE;
+                    progBarOutVoltage.WarningLevel = UPP_SQR_MAX_VALUE;
+                    break;
+                default:
+                case WaveFormsEnum.Sine:
+                case WaveFormsEnum.Triangular:
+                    tbOutVoltage.Maximum = UPP_DEFAULT_MAX_VALUE;
+                    progBarOutVoltage.Maximum = UPP_DEFAULT_MAX_VALUE;
+                    progBarOutVoltage.WarningLevel = UPP_DEFAULT_WARN_VALUE;
+                    break;
+            }
             adjustOutVoltage();
         }
 
@@ -155,7 +206,16 @@ namespace AD9833Control
             progBarOutVoltage.Value = tbOutVoltage.Value;
             short val = (short)tbOutVoltage.Value;
             settings.LastOutVoltage = val;
-            double dispVal = (double)val / (double)UPP_1V_VALUE;
+            double dispVal = 0;
+            if (rbWfSquare.Checked)
+            {
+                if (val > UPP_SQR_MAX_VALUE)
+                    val = UPP_SQR_MAX_VALUE;
+                dispVal = (double)val / (double)UPP_SQR_1V_VALUE;
+            }
+            else
+                dispVal = (double)val / (double)UPP_1V_VALUE;
+
             // https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx#FFormatString
             lblOutVoltage.Text = String.Format("Û= {0:F2} Vpp", dispVal);
             double dispValEff = 0;
@@ -174,6 +234,22 @@ namespace AD9833Control
             ctrl.OutVoltage = val;
         }
 
+        int getCenterFreqFromInput()
+        {
+            return (int)tbFreqHz1.Value
+               + (int)tbFreqHz10.Value * 10
+               + (int)tbFreqHz100.Value * 100
+               + (int)tbFreqkHz1.Value * 1000
+               + (int)tbFreqkHz10.Value * 10000
+               + (int)tbFreqkHz100.Value * 100000
+               + (int)tbFreqMHz.Value * 1000000;
+        }
+        private void TbFreqInput_ValueChanged(object sender, EventArgs e)
+        {
+            setFreqAdjustLowHighText();
+            adjustFreq();
+        }
+
         private void freqSliderMoved(object sender, EventArgs e)
         {
             adjustFreq();
@@ -189,6 +265,11 @@ namespace AD9833Control
             tbFreqHz10.Value = (centerFreq / 10) % 10;
             tbFreqHz1.Value = centerFreq % 10;
             tbFreqAdjust.Value = adjustFactor;
+        }
+
+        private void setFreqAdjustLowHighText()
+        {
+            int centerFreq = getCenterFreqFromInput();
             lblAdjFreqLow.Text = String.Format("{0:N0}", centerFreq / 10);
             int highFreqVal = centerFreq * 10;
             if (highFreqVal > AD9833Control.MAX_FREQ)
@@ -196,15 +277,10 @@ namespace AD9833Control
             lblAdjFreqHigh.Text = String.Format("{0:N0}", highFreqVal);
         }
 
+
         private void adjustFreq()
         {
-            int centerFreq = (int)tbFreqHz1.Value
-               + (int)tbFreqHz10.Value * 10
-               + (int)tbFreqHz100.Value * 100
-               + (int)tbFreqkHz1.Value * 1000
-               + (int)tbFreqkHz10.Value * 10000
-               + (int)tbFreqkHz100.Value * 100000
-               + (int)tbFreqMHz.Value * 1000000;
+            int centerFreq = getCenterFreqFromInput();
             int adjustFactor = tbFreqAdjust.Value;
             settings.LastFreq = centerFreq;
             settings.LastAdjustFreq = adjustFactor;
@@ -220,7 +296,10 @@ namespace AD9833Control
 
         private void btn1Vpp_Clicked(object sender, EventArgs e)
         {
-            tbOutVoltage.Value = UPP_1V_VALUE;
+            if (rbWfSquare.Checked)
+                tbOutVoltage.Value = UPP_SQR_1V_VALUE;
+            else
+                tbOutVoltage.Value = UPP_1V_VALUE;
             adjustOutVoltage();
         }
 

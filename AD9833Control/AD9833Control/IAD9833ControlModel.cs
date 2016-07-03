@@ -23,10 +23,12 @@ namespace AD9833Control
     public class SerialPortStatusChangedEventArgs
     {
         public SerialPortStatus status { get; }
+        public String ackMsg;
         public Exception exception { get; }
-        public SerialPortStatusChangedEventArgs(SerialPortStatus s, Exception ex)
+        public SerialPortStatusChangedEventArgs(SerialPortStatus s, String a, Exception ex)
         {
             status = s;
+            ackMsg = a;
             exception = ex;
         }
     }
