@@ -13,6 +13,13 @@ namespace AD9833Control
 {
     public partial class MainWindowForm : Form
     {
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        static extern uint SendMessage(IntPtr hWnd,
+          uint Msg,
+          uint wParam,
+          uint lParam);
+
         private const short UPP_DEFAULT_MAX_VALUE = 255;
         private const short UPP_1V_VALUE = 144;
         private const short UPP_SQR_1V_VALUE = 25;
@@ -25,18 +32,19 @@ namespace AD9833Control
         private SerialPortStatus connectedState = SerialPortStatus.Closed;
         private AD9833ControlSettings settings = new AD9833ControlSettings();
         private List<Control> interactiveControls = new List<Control>();
+
         public MainWindowForm(AD9833Control ctrl)
         {
             this.ctrl = ctrl;
             InitializeComponent();
 
-            interactiveControls.Add(tbFreqHz1);
-            interactiveControls.Add(tbFreqHz10);
-            interactiveControls.Add(tbFreqHz100);
-            interactiveControls.Add(tbFreqkHz1);
-            interactiveControls.Add(tbFreqkHz10);
-            interactiveControls.Add(tbFreqkHz100);
-            interactiveControls.Add(tbFreqMHz);
+            interactiveControls.Add(ncFreqHz1);
+            interactiveControls.Add(ncFreqHz10);
+            interactiveControls.Add(ncFreqHz100);
+            interactiveControls.Add(ncFreqkHz1);
+            interactiveControls.Add(ncFreqkHz10);
+            interactiveControls.Add(ncFreqkHz100);
+            interactiveControls.Add(ncFreqMHz);
             interactiveControls.Add(tbOutVoltage);
             interactiveControls.Add(tbFreqAdjust);
             interactiveControls.Add(btn1Vpp);
@@ -45,13 +53,13 @@ namespace AD9833Control
             interactiveControls.Add(rbWfSquare);
             interactiveControls.Add(rbWfTriangular);
 
-            tbFreqHz1.ValueChanged += TbFreqInput_ValueChanged; ;
-            tbFreqHz10.ValueChanged += TbFreqInput_ValueChanged;
-            tbFreqHz100.ValueChanged += TbFreqInput_ValueChanged;
-            tbFreqkHz1.ValueChanged += TbFreqInput_ValueChanged;
-            tbFreqkHz10.ValueChanged += TbFreqInput_ValueChanged;
-            tbFreqkHz100.ValueChanged += TbFreqInput_ValueChanged;
-            tbFreqMHz.ValueChanged += TbFreqInput_ValueChanged;
+            ncFreqHz1.ValueChanged += NcFreqInput_ValueChanged; ;
+            ncFreqHz10.ValueChanged += NcFreqInput_ValueChanged;
+            ncFreqHz100.ValueChanged += NcFreqInput_ValueChanged;
+            ncFreqkHz1.ValueChanged += NcFreqInput_ValueChanged;
+            ncFreqkHz10.ValueChanged += NcFreqInput_ValueChanged;
+            ncFreqkHz100.ValueChanged += NcFreqInput_ValueChanged;
+            ncFreqMHz.ValueChanged += NcFreqInput_ValueChanged;
             tbFreqAdjust.Scroll += freqSliderMoved;
             tbOutVoltage.Scroll += voltageSliderMoved;
             ctrl.SerialPortStatusChanged += Ctrl_SerialPortStatusChanged;
@@ -236,15 +244,15 @@ namespace AD9833Control
 
         int getCenterFreqFromInput()
         {
-            return (int)tbFreqHz1.Value
-               + (int)tbFreqHz10.Value * 10
-               + (int)tbFreqHz100.Value * 100
-               + (int)tbFreqkHz1.Value * 1000
-               + (int)tbFreqkHz10.Value * 10000
-               + (int)tbFreqkHz100.Value * 100000
-               + (int)tbFreqMHz.Value * 1000000;
+            return (int)ncFreqHz1.Value
+               + (int)ncFreqHz10.Value * 10
+               + (int)ncFreqHz100.Value * 100
+               + (int)ncFreqkHz1.Value * 1000
+               + (int)ncFreqkHz10.Value * 10000
+               + (int)ncFreqkHz100.Value * 100000
+               + (int)ncFreqMHz.Value * 1000000;
         }
-        private void TbFreqInput_ValueChanged(object sender, EventArgs e)
+        private void NcFreqInput_ValueChanged(object sender, EventArgs e)
         {
             setFreqAdjustLowHighText();
             adjustFreq();
@@ -257,13 +265,13 @@ namespace AD9833Control
 
         private void setFreqSliders(int centerFreq, int adjustFactor)
         {
-            tbFreqMHz.Value = centerFreq / 1000000;
-            tbFreqkHz100.Value = (centerFreq / 100000) % 10;
-            tbFreqkHz10.Value = (centerFreq / 10000) % 10;
-            tbFreqkHz1.Value = (centerFreq / 1000) % 10;
-            tbFreqHz100.Value = (centerFreq / 100) % 10;
-            tbFreqHz10.Value = (centerFreq / 10) % 10;
-            tbFreqHz1.Value = centerFreq % 10;
+            ncFreqMHz.Value = centerFreq / 1000000;
+            ncFreqkHz100.Value = (centerFreq / 100000) % 10;
+            ncFreqkHz10.Value = (centerFreq / 10000) % 10;
+            ncFreqkHz1.Value = (centerFreq / 1000) % 10;
+            ncFreqHz100.Value = (centerFreq / 100) % 10;
+            ncFreqHz10.Value = (centerFreq / 10) % 10;
+            ncFreqHz1.Value = centerFreq % 10;
             tbFreqAdjust.Value = adjustFactor;
         }
 
@@ -291,7 +299,6 @@ namespace AD9833Control
             }
             lblActFreq.Text = String.Format("{0:N0} Hz", (long)actFreq);
             ctrl.Frequency = (long)actFreq;
-            ctrl.Enabled = outputEnabled;
         }
 
         private void btn1Vpp_Clicked(object sender, EventArgs e)
@@ -302,12 +309,6 @@ namespace AD9833Control
                 tbOutVoltage.Value = UPP_1V_VALUE;
             adjustOutVoltage();
         }
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        static extern uint SendMessage(IntPtr hWnd,
-          uint Msg,
-          uint wParam,
-          uint lParam);
 
         private void btnFreqAdjustRest_Clicked(object sender, EventArgs e)
         {
@@ -333,7 +334,7 @@ namespace AD9833Control
                 btnDisableOutput.Enabled = false;
                 btnDisableOutput.ForeColor = Color.Gray;
             }
-            adjustFreq();
+            ctrl.Enabled = outputEnabled;
         }
     }
 }

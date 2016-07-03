@@ -43,17 +43,17 @@
             this.progBarOutVoltage = new AD9833ControlCustomForms.VerticalProgressBar();
             this.gbFreqSetting = new System.Windows.Forms.GroupBox();
             this.tblLayPnlFrequencySliders = new System.Windows.Forms.TableLayoutPanel();
-            this.tbFreqHz1 = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqHz1 = new System.Windows.Forms.NumericUpDown();
             this.lblAdjFreqHigh = new System.Windows.Forms.Label();
-            this.tbFreqHz10 = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqHz10 = new System.Windows.Forms.NumericUpDown();
             this.lblAdjFreqLow = new System.Windows.Forms.Label();
-            this.tbFreqHz100 = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqHz100 = new System.Windows.Forms.NumericUpDown();
             this.lblActFreq = new System.Windows.Forms.Label();
-            this.tbFreqkHz1 = new System.Windows.Forms.NumericUpDown();
-            this.tbFreqMHz = new System.Windows.Forms.NumericUpDown();
-            this.tbFreqkHz10 = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqkHz1 = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqMHz = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqkHz10 = new System.Windows.Forms.NumericUpDown();
             this.tbFreqAdjust = new System.Windows.Forms.TrackBar();
-            this.tbFreqkHz100 = new System.Windows.Forms.NumericUpDown();
+            this.ncFreqkHz100 = new System.Windows.Forms.NumericUpDown();
             this.btnFreqAdjustReset = new System.Windows.Forms.Button();
             this.lblFreqSbMHz = new System.Windows.Forms.Label();
             this.lblFreqSbkHz100 = new System.Windows.Forms.Label();
@@ -79,14 +79,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbOutVoltage)).BeginInit();
             this.gbFreqSetting.SuspendLayout();
             this.tblLayPnlFrequencySliders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqHz1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqHz10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqHz100)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqkHz1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqMHz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqkHz10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqHz1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqHz10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqHz100)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqkHz1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqMHz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqkHz10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFreqAdjust)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqkHz100)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqkHz100)).BeginInit();
             this.gbWaveForm.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -291,17 +291,17 @@
             this.tblLayPnlFrequencySliders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
             this.tblLayPnlFrequencySliders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
             this.tblLayPnlFrequencySliders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqHz1, 6, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqHz1, 6, 1);
             this.tblLayPnlFrequencySliders.Controls.Add(this.lblAdjFreqHigh, 6, 3);
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqHz10, 5, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqHz10, 5, 1);
             this.tblLayPnlFrequencySliders.Controls.Add(this.lblAdjFreqLow, 0, 3);
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqHz100, 4, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqHz100, 4, 1);
             this.tblLayPnlFrequencySliders.Controls.Add(this.lblActFreq, 0, 0);
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqkHz1, 3, 1);
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqMHz, 0, 1);
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqkHz10, 2, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqkHz1, 3, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqMHz, 0, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqkHz10, 2, 1);
             this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqAdjust, 1, 3);
-            this.tblLayPnlFrequencySliders.Controls.Add(this.tbFreqkHz100, 1, 1);
+            this.tblLayPnlFrequencySliders.Controls.Add(this.ncFreqkHz100, 1, 1);
             this.tblLayPnlFrequencySliders.Controls.Add(this.btnFreqAdjustReset, 2, 4);
             this.tblLayPnlFrequencySliders.Controls.Add(this.lblFreqSbMHz, 0, 2);
             this.tblLayPnlFrequencySliders.Controls.Add(this.lblFreqSbkHz100, 1, 2);
@@ -323,18 +323,18 @@
             // 
             // tbFreqHz1
             // 
-            this.tbFreqHz1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqHz1.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqHz1.Location = new System.Drawing.Point(522, 103);
-            this.tbFreqHz1.Maximum = new decimal(new int[] {
+            this.ncFreqHz1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqHz1.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqHz1.Location = new System.Drawing.Point(522, 103);
+            this.ncFreqHz1.Maximum = new decimal(new int[] {
             9,
             0,
             0,
             0});
-            this.tbFreqHz1.Name = "tbFreqHz1";
-            this.tbFreqHz1.Size = new System.Drawing.Size(40, 45);
-            this.tbFreqHz1.TabIndex = 14;
-            this.tbFreqHz1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqHz1.Name = "tbFreqHz1";
+            this.ncFreqHz1.Size = new System.Drawing.Size(40, 45);
+            this.ncFreqHz1.TabIndex = 14;
+            this.ncFreqHz1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblAdjFreqHigh
             // 
@@ -352,18 +352,18 @@
             // 
             // tbFreqHz10
             // 
-            this.tbFreqHz10.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqHz10.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqHz10.Location = new System.Drawing.Point(436, 103);
-            this.tbFreqHz10.Maximum = new decimal(new int[] {
+            this.ncFreqHz10.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqHz10.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqHz10.Location = new System.Drawing.Point(436, 103);
+            this.ncFreqHz10.Maximum = new decimal(new int[] {
             9,
             0,
             0,
             0});
-            this.tbFreqHz10.Name = "tbFreqHz10";
-            this.tbFreqHz10.Size = new System.Drawing.Size(40, 45);
-            this.tbFreqHz10.TabIndex = 14;
-            this.tbFreqHz10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqHz10.Name = "tbFreqHz10";
+            this.ncFreqHz10.Size = new System.Drawing.Size(40, 45);
+            this.ncFreqHz10.TabIndex = 14;
+            this.ncFreqHz10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblAdjFreqLow
             // 
@@ -381,18 +381,18 @@
             // 
             // tbFreqHz100
             // 
-            this.tbFreqHz100.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqHz100.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqHz100.Location = new System.Drawing.Point(353, 103);
-            this.tbFreqHz100.Maximum = new decimal(new int[] {
+            this.ncFreqHz100.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqHz100.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqHz100.Location = new System.Drawing.Point(353, 103);
+            this.ncFreqHz100.Maximum = new decimal(new int[] {
             9,
             0,
             0,
             0});
-            this.tbFreqHz100.Name = "tbFreqHz100";
-            this.tbFreqHz100.Size = new System.Drawing.Size(40, 45);
-            this.tbFreqHz100.TabIndex = 14;
-            this.tbFreqHz100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqHz100.Name = "tbFreqHz100";
+            this.ncFreqHz100.Size = new System.Drawing.Size(40, 45);
+            this.ncFreqHz100.TabIndex = 14;
+            this.ncFreqHz100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblActFreq
             // 
@@ -413,48 +413,48 @@
             // 
             // tbFreqkHz1
             // 
-            this.tbFreqkHz1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqkHz1.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqkHz1.Location = new System.Drawing.Point(270, 103);
-            this.tbFreqkHz1.Maximum = new decimal(new int[] {
+            this.ncFreqkHz1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqkHz1.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqkHz1.Location = new System.Drawing.Point(270, 103);
+            this.ncFreqkHz1.Maximum = new decimal(new int[] {
             9,
             0,
             0,
             0});
-            this.tbFreqkHz1.Name = "tbFreqkHz1";
-            this.tbFreqkHz1.Size = new System.Drawing.Size(40, 45);
-            this.tbFreqkHz1.TabIndex = 14;
-            this.tbFreqkHz1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqkHz1.Name = "tbFreqkHz1";
+            this.ncFreqkHz1.Size = new System.Drawing.Size(40, 45);
+            this.ncFreqkHz1.TabIndex = 14;
+            this.ncFreqkHz1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbFreqMHz
             // 
-            this.tbFreqMHz.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqMHz.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqMHz.Location = new System.Drawing.Point(12, 103);
-            this.tbFreqMHz.Maximum = new decimal(new int[] {
+            this.ncFreqMHz.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqMHz.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqMHz.Location = new System.Drawing.Point(12, 103);
+            this.ncFreqMHz.Maximum = new decimal(new int[] {
             12,
             0,
             0,
             0});
-            this.tbFreqMHz.Name = "tbFreqMHz";
-            this.tbFreqMHz.Size = new System.Drawing.Size(59, 45);
-            this.tbFreqMHz.TabIndex = 2;
-            this.tbFreqMHz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqMHz.Name = "tbFreqMHz";
+            this.ncFreqMHz.Size = new System.Drawing.Size(59, 45);
+            this.ncFreqMHz.TabIndex = 2;
+            this.ncFreqMHz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbFreqkHz10
             // 
-            this.tbFreqkHz10.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqkHz10.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqkHz10.Location = new System.Drawing.Point(187, 103);
-            this.tbFreqkHz10.Maximum = new decimal(new int[] {
+            this.ncFreqkHz10.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqkHz10.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqkHz10.Location = new System.Drawing.Point(187, 103);
+            this.ncFreqkHz10.Maximum = new decimal(new int[] {
             9,
             0,
             0,
             0});
-            this.tbFreqkHz10.Name = "tbFreqkHz10";
-            this.tbFreqkHz10.Size = new System.Drawing.Size(40, 45);
-            this.tbFreqkHz10.TabIndex = 14;
-            this.tbFreqkHz10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqkHz10.Name = "tbFreqkHz10";
+            this.ncFreqkHz10.Size = new System.Drawing.Size(40, 45);
+            this.ncFreqkHz10.TabIndex = 14;
+            this.ncFreqkHz10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbFreqAdjust
             // 
@@ -473,18 +473,18 @@
             // 
             // tbFreqkHz100
             // 
-            this.tbFreqkHz100.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbFreqkHz100.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFreqkHz100.Location = new System.Drawing.Point(104, 103);
-            this.tbFreqkHz100.Maximum = new decimal(new int[] {
+            this.ncFreqkHz100.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ncFreqkHz100.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ncFreqkHz100.Location = new System.Drawing.Point(104, 103);
+            this.ncFreqkHz100.Maximum = new decimal(new int[] {
             9,
             0,
             0,
             0});
-            this.tbFreqkHz100.Name = "tbFreqkHz100";
-            this.tbFreqkHz100.Size = new System.Drawing.Size(40, 45);
-            this.tbFreqkHz100.TabIndex = 3;
-            this.tbFreqkHz100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ncFreqkHz100.Name = "tbFreqkHz100";
+            this.ncFreqkHz100.Size = new System.Drawing.Size(40, 45);
+            this.ncFreqkHz100.TabIndex = 3;
+            this.ncFreqkHz100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnFreqAdjustReset
             // 
@@ -703,14 +703,14 @@
             this.gbFreqSetting.ResumeLayout(false);
             this.tblLayPnlFrequencySliders.ResumeLayout(false);
             this.tblLayPnlFrequencySliders.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqHz1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqHz10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqHz100)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqkHz1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqMHz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqkHz10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqHz1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqHz10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqHz100)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqkHz1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqMHz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqkHz10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFreqAdjust)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFreqkHz100)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ncFreqkHz100)).EndInit();
             this.gbWaveForm.ResumeLayout(false);
             this.gbWaveForm.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -756,13 +756,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnEnableOutput;
         private System.Windows.Forms.Button btnDisableOutput;
-        private System.Windows.Forms.NumericUpDown tbFreqHz10;
-        private System.Windows.Forms.NumericUpDown tbFreqHz100;
-        private System.Windows.Forms.NumericUpDown tbFreqkHz1;
-        private System.Windows.Forms.NumericUpDown tbFreqkHz10;
-        private System.Windows.Forms.NumericUpDown tbFreqkHz100;
-        private System.Windows.Forms.NumericUpDown tbFreqMHz;
-        private System.Windows.Forms.NumericUpDown tbFreqHz1;
+        private System.Windows.Forms.NumericUpDown ncFreqHz10;
+        private System.Windows.Forms.NumericUpDown ncFreqHz100;
+        private System.Windows.Forms.NumericUpDown ncFreqkHz1;
+        private System.Windows.Forms.NumericUpDown ncFreqkHz10;
+        private System.Windows.Forms.NumericUpDown ncFreqkHz100;
+        private System.Windows.Forms.NumericUpDown ncFreqMHz;
+        private System.Windows.Forms.NumericUpDown ncFreqHz1;
         private System.Windows.Forms.TextBox textBoxLogger;
     }
 }
