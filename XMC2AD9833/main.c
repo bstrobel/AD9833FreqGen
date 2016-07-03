@@ -20,6 +20,8 @@
 #define CMD_WF_SINE  's'
 #define CMD_WF_TRIANGULAR  't'
 #define CMD_WF_SQUARE  'q'
+#define CMD_SET_INTERACTIVE 'i'
+#define CMD_CLEARE_INTERACTIVE 'I'
 
 #define BUFF_SIZE 25
 #define MAX_NUM_PARAM 3
@@ -28,6 +30,8 @@ char err_msg_buff_ovflw[] = "ERR:Input Buffer Overflow\r\n";
 char err_msg_processing_ovflw[] = "ERR:Processing Overflow\r\n";
 char err_msg_unkown_cmd[] = "ERR:Unknown Command\r\n";
 char ack_msg_format_str[] = "ACK:%d%c%d%c%d%c%c";
+char ack_interactive_on_str[] = "ACK:Interactive Mode ON\r\n";
+char ack_interactive_off_str[] = "ACK:Interactive Mode OFF\r\n";
 char separators[] = { S };
 char rec_data[BUFF_SIZE];
 uint8_t rec_data_idx = 0;
@@ -36,6 +40,7 @@ enum AD9833_OUT_TYPE wf = RESET;
 int freq = 0;
 int output = 0;
 bool newData = false;
+bool is_interactive = false;
 int uart_error_cnt = 0;
 
 /**
@@ -92,7 +97,6 @@ int main(void) {
 				AD9833_Reset();
 				MCP41010_StartSPI();
 				MCP41010_set(0);
-				DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED1); //LED1 off
 			}
 			else
 			{
@@ -100,9 +104,7 @@ int main(void) {
 				AD9833_SelFreqPhase(0, 0, wf);
 				MCP41010_StartSPI();
 				MCP41010_set(output);
-				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); //LED1 on
 			}
-			DIGITAL_IO_SetOutputLow(&DIGITAL_IO_LED2); // LED2 off
 			char echo_str[BUFF_SIZE];
 			uint len = snprintf(echo_str, BUFF_SIZE, ack_msg_format_str, wf, S, freq, S, output, T, T_NL);
 			UART_Transmit(&UART_0, (uint8_t*) echo_str, len);
@@ -125,7 +127,7 @@ void ISR_UART_Receive(void)
 {
 	// handle backspace and DEL
 	// makes handling from a terminal easier.
-	if (inchar == 127 || inchar == 8)
+	if ((inchar == 127 || inchar == 8) && is_interactive)
 	{
 		if (rec_data_idx > 0)
 		{
@@ -147,24 +149,29 @@ void ISR_UART_Receive(void)
 		rec_data_idx++;
 		// Handle buffer overflow
 		if (rec_data_idx >= BUFF_SIZE) {
-			UART_TransmitWord(&UART_0,T);
-			UART_TransmitWord(&UART_0,T_NL);
+			if (is_interactive)
+			{
+				UART_TransmitWord(&UART_0,T);
+				UART_TransmitWord(&UART_0,T_NL);
+			}
 			UART_Transmit(&UART_0, (uint8_t*) err_msg_buff_ovflw,
 					sizeof(err_msg_buff_ovflw) - 1);
-			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
+			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED1); // LED2 on
 			rec_data_idx = 0;
 			memset(rec_data, 0, BUFF_SIZE); // clear buffer
 			return;
 		}
 	}
-	UART_TransmitWord(&UART_0, inchar);
+	if (is_interactive)
+		UART_TransmitWord(&UART_0, inchar);
 
 	// We have received a termination character and no previous data is waiting
 	// to be processed.
 	if (rec_data_idx > 0 && rec_data[rec_data_idx-1] == T) {
 		if (rec_data_idx == 1) // empty line
 		{
-			UART_TransmitWord(&UART_0,T_NL);
+			if (is_interactive)
+				UART_TransmitWord(&UART_0,T_NL);
 			rec_data_idx = 0;
 			memset(rec_data, 0, BUFF_SIZE); // clear buffer
 			return;
@@ -203,12 +210,26 @@ void ISR_UART_Receive(void)
 			case CMD_RESET:
 				wf = RESET;
 				break;
+			case CMD_SET_INTERACTIVE:
+				is_interactive = true;
+				UART_Transmit(&UART_0, (uint8_t*) ack_interactive_on_str,
+						sizeof(ack_interactive_on_str) - 1);
+				rec_data_idx = 0;
+				memset(rec_data, 0, BUFF_SIZE); // clear buffer
+				return;
+			case CMD_CLEARE_INTERACTIVE:
+				is_interactive = false;
+				UART_Transmit(&UART_0, (uint8_t*) ack_interactive_off_str,
+						sizeof(ack_interactive_off_str) - 1);
+				rec_data_idx = 0;
+				memset(rec_data, 0, BUFF_SIZE); // clear buffer
+				return;
 			default:
 				// unknown command, so get out of here
-				UART_TransmitWord(&UART_0,T_NL);
+				if (is_interactive)
+					UART_TransmitWord(&UART_0,T_NL);
 				UART_Transmit(&UART_0, (uint8_t*) err_msg_unkown_cmd,
 						sizeof(err_msg_unkown_cmd) - 1);
-				DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_LED2); // LED2 on
 				rec_data_idx = 0;
 				memset(rec_data, 0, BUFF_SIZE); // clear buffer
 				return;
@@ -217,7 +238,8 @@ void ISR_UART_Receive(void)
 				freq = atoi(tk[1]);
 			if (idx > 1)
 				output = atoi(tk[2]);
-			UART_TransmitWord(&UART_0, T_NL); // Newline for the terminal
+			if (is_interactive)
+				UART_TransmitWord(&UART_0, T_NL); // Newline for the terminal
 			newData = true;
 		}
 		rec_data_idx = 0;
